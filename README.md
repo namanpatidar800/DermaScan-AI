@@ -1,115 +1,127 @@
-# Dermascan AI
+<div align="center">
+  <img src="client/public/logo-placeholder.svg" alt="DermaScan AI Logo" width="120" />
 
-## Overview
-Dermascan AI is an AI-assisted skin assessment platform that allows users to upload a skin image, provide symptom information, receive an AI-assisted preliminary assessment, review previous analyses, and locate nearby healthcare facilities.
+  # 🩺 DermaScan AI
+  **An Intelligent, AI-Assisted Preliminary Skin Health Assessment Platform**
 
-> **IMPORTANT MEDICAL DISCLAIMER:**
-> This project is for informational/demo purposes and is **not** a medical diagnosis system. Results are strictly informational estimations provided by large language models. The software must not be used to prescribe medication, start, stop, or change a medical treatment, nor determine the malignancy of lesions. Always consult a qualified healthcare professional.
+  [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+  [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+  [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+  [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+  [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
 
-## Features
-* **Authentication**: Secure JWT-based backend protection with `bcryptjs` encryption.
-* **Skin image upload**: Seamless Drag & Drop interface with a 10MB memory limit enforced by Multer. Contains support for native mobile camera capture (`capture="environment"`).
-* **Symptom questionnaire**: An intuitive multi-step form logging location, duration, and boolean modifiers to guide the AI pipeline.
-* **AI-assisted analysis**: Supports deterministic `mock` demonstrations out-of-the-box for Hackathons, or can be toggled to a Live Vision AI endpoint (like OpenAI `gpt-4o`). 
-* **Analysis history**: Filtered Dashboard and History tabs bound safely to horizontal authorization contexts preventing data leaks.
-* **Nearby dermatologist discovery**: Mapbox Integration utilizing the browser's native Geolocation API or manual ZIP querying to reveal clustering of local verified POIs.
-* **Responsive UI**: A sleek, dark-mode, glassmorphism design optimized fluidly from 320px mobile vis-ports up to 1440px desktop resolutions using Tailwind CSS.
+  [View Live Demo](#live-link) • [Features](#-features) • [Installation](#-installation) • [Medical Disclaimer](#-important-medical-disclaimer)
 
-## Tech Stack
-**Frontend:**
-* React, Vite, Tailwind CSS, React Router, Axios, Lucide React, Mapbox GL JS 
+</div>
 
-**Backend:**
-* Node.js, Express.js, MongoDB, Mongoose, JWT, bcryptjs, Multer
+---
 
-**AI:**
-* Mock JSON deterministic provider
-* Configurable real AI provider (Generic Chat Completions schema)
+## 🌐 Live Link
+> **Try out DermaScan AI Live:**
+> 👉 **[Insert Your Live Website URL Here]**
 
-## Project Structure
-* `client/` - Contains the React Vite SPA. Includes reusable components, Context models (AuthContext), protected routes, API proxying, and page styling.
-* `server/` - Contains the Node Express REST API. Utilizes an MVC structure dividing Routes, Controllers, Mongoose Models, reusable Services, and API Middlewares.
+---
 
-## Prerequisites
-* Node.js (v18+ recommended)
-* MongoDB Database URI Cluster
-* Mapbox Public API Token 
-* AI Provider Credentials (when `AI_PROVIDER=real` mode is engaged)
+## 📖 Overview
+**DermaScan AI** bridges the gap between everyday skin concerns and preliminary assessments. Built during a Hackathon, this full-stack application allows users to securely upload photos of skin lesions, submit a structured medical questionnaire, and dynamically receive an AI-generated preliminary report alongside interactive geolocations of nearby certified Dermatologists.
 
-## Installation
+<div align="center">
+  *(Add your beautiful dashboard/result screenshots here!)*
+</div>
 
-1. **Clone repository** 
-   ```bash
-   git clone <repo-url>
-   cd DermaScan-AI
-   ```
+---
 
-2. **Install client dependencies**
-   ```bash
-   cd client
-   npm install
-   ```
+## ⚠️ Important Medical Disclaimer
+**DermaScan AI is NOT a substitute for professional medical care.**
+Results are strictly informational estimations provided by large language models (LLMs). The software **must never** be used to prescribe medication, start, stop, or alter a treatment plan, nor determine the absolute malignancy of lesions. Always consult a qualified healthcare professional.
 
-3. **Install server dependencies**
-   ```bash
-   cd ../server
-   npm install
-   ```
+---
 
-4. **Create environment files**
-   Copy the example environment files into active secrets.
-   ```bash
-   cp client/.env.example client/.env
-   cp server/.env.example server/.env
-   ```
+## ✨ Features
+- 🔐 **Secure Authentication:** JWT-based robust protection with bcrypt encryption and horizontal data scoping.
+- 📸 **Smart Image Uploads:** Seamless Drag & Drop interface with mobile native-camera bridging and automatic `multer` bounds.
+- 🤖 **AI Model Orchestration:** Selectable Abstract Factory pattern backend. Features a lightning-fast deterministic `Mock` provider for zero-cost demonstrations, cleanly swappable to `Real` AI Vision integration (e.g., OpenAI `gpt-4o`).
+- 🏥 **Dermatologist Maps Discovery:** Real-time Geocoding and Interactive POI extraction via Mapbox GL JS integrations.
+- 📊 **Responsive Dashboard History:** Dark-mode, glassmorphism-inspired UI detailing historical conditions and confidence matrices visually.
 
-5. **Configure variables**
-   Ensure `client/.env` possesses your keys.
-   Ensure `server/.env` contains your active MongoDB cluster URI string and a complex randomized `JWT_SECRET`. 
+---
 
-6. **Start components locally**
-   *Terminal 1 (Backend)*:
-   ```bash
-   cd server
-   npm run dev
-   ```
-   *Terminal 2 (Frontend)*:
-   ```bash
-   cd client
-   npm run dev
-   ```
+## 🛠️ Tech Stack
+| Tier        | Technologies Used                                                                     |
+|-------------|----------------------------------------------------------------------------------------|
+| **Frontend** | React 19, Vite, Tailwind CSS v4, React Router DOM, Lucide React, Mapbox GL JS          |
+| **Backend**  | Node.js, Express.js, MongoDB + Mongoose, JWT, bcryptjs, Multer, Express Rate Limit     |
+| **AI Layer** | Configurable Vision JSON LLM Wrapper (`AI_PROVIDER=mock|real`)                       |
 
-## Environment Variables
+---
 
-**Frontend (`client/.env`)**:
-* `VITE_API_URL`=http://localhost:5000/api
-* `VITE_MAPBOX_TOKEN`=your_mapbox_public_token
+## 🚀 Installation & Local Setup
 
-**Backend (`server/.env`)**:
-* `PORT`=5000
-* `MONGODB_URI`=your_atlas_connection_string
-* `JWT_SECRET`=randomized_cryptographic_string 
-* `CLIENT_URL`=http://localhost:5173
-* `AI_PROVIDER`=mock
-* `AI_API_KEY`=your_live_llm_vision_key
-* `AI_MODEL`=gpt-4o
-* `AI_TIMEOUT_MS`=30000
+### 1. Prerequisites
+- **Node.js**: v18 or newer
+- **Database**: MongoDB Atlas Cluster URI
+- **Mapping**: Mapbox Public API Token 
+- **AI (Optional)**: OpenAI API Key (if switching to Live Model)
 
-## AI Provider Modes
+### 2. Clone the Repository
+```bash
+git clone https://github.com/your-username/DermaScan-AI.git
+cd DermaScan-AI
+```
 
-### AI_PROVIDER=mock
-This is the default configuration designed strictly for Hackathon presentations and localized development where LLM billing costs are unnecessary. It parses incoming image queues instantaneously and yields one of several structurally valid but deterministic medical archetypes safely.
+### 3. Install Dependencies
+This project uses two partitioned layers.
+```bash
+# Terminal 1 - Backend
+cd server
+npm install
 
-### AI_PROVIDER=real
-This commands the application's Abstracted Strategy architecture to switch routing targets to the `AI_API_URL` utilizing the `AI_API_KEY`. Real provider credentials must **always** remain sequestered server-side under `server/.env` logic. 
+# Terminal 2 - Frontend
+cd client
+npm install
+```
 
-## Security Notes
-* **Secrets belong in environment variables.** By default, `.gitignore` absolutely denies tracing of `.env` configurations. Never bypass this.
-* Deployments must be encapsulated under SSL / HTTPS parameters before going public.
-* Remember to cycle `JWT_SECRET` keys intermittently to expire all lingering active authentication tokens forcefully.
+### 4. Environment Blueprint
+Create an `.env` file inside **both** the `server` and `client` directories using the reference keys below:
 
-## Deployment 
-The system utilizes two detached environments cleanly. 
+**Client (`client/.env`)**:
+```env
+VITE_API_URL=/api
+VITE_MAPBOX_TOKEN=your_mapbox_token_here
+```
 
-1. **Frontend**: Point a provider (like Vercel, Netlify, or Cloudflare Pages) to the `client/` subdirectory. Use `npm run build` as the Build Command, and point the Publish Directory to `dist`. Populate the environmental overrides through their web portals.
-2. **Backend**: Host the Express service on a PAAS (Render, Railway, or Fly.io). Point it to `server/`. Use `npm start` (which hooks into `node server.js`). Manually copy all production database and authentication variables into the container environment.
+**Server (`server/.env`)**:
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_cluster_uri_here
+JWT_SECRET=super_secret_cryptographic_string_here
+CLIENT_URL=http://localhost:5174
+
+# Choose 'mock' for free demo running, or 'real' for Live Vision
+AI_PROVIDER=mock
+AI_API_KEY=your_live_llm_key  
+AI_API_URL=https://api.openai.com/v1/chat/completions
+```
+
+### 5. Fire it up!
+Start both development servers concurrently.
+```bash
+# In your server terminal
+npm run dev
+
+# In your client terminal
+npm run dev
+```
+Navigate to your provided Vite network URL (e.g., `http://localhost:5173` or `5174`) in your browser to begin exploring!
+
+---
+
+## ☁️ Deployment Guidelines
+- **Frontend**: Effortlessly hosted on platforms like Vercel, Netlify, or Cloudflare pages. Simply point the Build Command to `npm run build` and directory to `dist`. Ensure to map the target Environmental Variables in their dashboard.
+- **Backend**: Can be hosted on Railway, Render, or Fly.io as a standard Express application using `npm start`.
+
+---
+
+<div align="center">
+  Made with ❤️ for Hackathons by [Your Name/Team].
+</div>
