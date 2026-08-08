@@ -17,7 +17,7 @@
 
 ## 🌐 Live Link
 > **Try out DermaScan AI Live:**
-> 👉 **[Insert Your Live Website URL Here]**
+> 👉 **[https://dermascan-ai-iwt7.onrender.com/](https://dermascan-ai-iwt7.onrender.com/)**
 
 ---
 
