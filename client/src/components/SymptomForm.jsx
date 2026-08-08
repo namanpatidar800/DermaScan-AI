@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CheckCircle, ChevronLeft, ScanLine } from 'lucide-react';
+import { CheckCircle, ChevronLeft, ChevronRight, ScanLine } from 'lucide-react';
 
 const LOCATIONS = ['Face', 'Neck', 'Scalp', 'Arms', 'Hands', 'Legs', 'Feet', 'Torso/Chest', 'Back', 'Groin', 'Other'];
 const DURATIONS = ['Less than 1 day', '1–7 days', '1–4 weeks', '1–6 months', 'More than 6 months', 'Not sure'];
