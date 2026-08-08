@@ -1,4 +1,5 @@
 <div align="center">
+  
   # 🩺 DermaScan AI
   **An Intelligent, AI-Assisted Preliminary Skin Health Assessment Platform**
 
