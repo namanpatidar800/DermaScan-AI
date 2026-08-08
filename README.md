@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="client/public/logo-placeholder.svg" alt="DermaScan AI Logo" width="120" />
 
   # 🩺 DermaScan AI
   **An Intelligent, AI-Assisted Preliminary Skin Health Assessment Platform**
