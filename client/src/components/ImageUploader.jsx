@@ -11,7 +11,8 @@ const ImageUploader = ({ onImageReady, onNext }) => {
     const [error, setError] = useState('');
     const [qualityState, setQualityState] = useState(null); // 'checking' | 'passed' | 'failed'
     const [qualityIssues, setQualityIssues] = useState([]);
-    const inputRef = useRef();
+    const cameraInputRef = useRef();
+    const uploadInputRef = useRef();
 
     const validateFormat = (f) => {
         const allowed = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
@@ -132,17 +133,28 @@ const ImageUploader = ({ onImageReady, onNext }) => {
                     onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
                     onDragLeave={() => setDragging(false)}
                     onDrop={handleDrop}
-                    onClick={() => inputRef.current.click()}
-                    className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-200 ${dragging
+                    className={`border-2 border-dashed rounded-2xl p-8 sm:p-12 text-center transition-all duration-200 ${dragging
                         ? 'border-primary-400 bg-primary-100'
                         : 'border-surface-300 hover:border-primary-400 hover:bg-surface-100'
                         }`}
                 >
                     <Upload className="w-10 h-10 text-primary-400 mx-auto mb-4" />
                     <p className="text-surface-900 font-medium mb-1">Drag & drop your image here</p>
-                    <p className="text-surface-800 text-sm mb-4">or click to browse files</p>
-                    <span className="text-xs text-surface-800">JPG, JPEG, PNG, WebP · Max 10MB</span>
-                    <input ref={inputRef} type="file" accept="image/jpeg,image/jpg,image/png,image/webp" className="hidden" onChange={(e) => handleFile(e.target.files[0])} />
+                    <p className="text-surface-800 text-sm mb-6">or choose an input method below</p>
+
+                    <div className="flex flex-col sm:flex-row justify-center gap-3 max-w-sm mx-auto">
+                        <button onClick={() => cameraInputRef.current.click()} className="flex items-center justify-center gap-2 flex-1 py-2.5 bg-primary-50 hover:bg-primary-100 border border-primary-200 text-primary-700 font-semibold rounded-xl transition-all shadow-sm">
+                            📸 Open Camera
+                        </button>
+                        <button onClick={() => uploadInputRef.current.click()} className="flex items-center justify-center gap-2 flex-1 py-2.5 bg-white hover:bg-surface-50 border border-surface-200 text-surface-800 font-semibold rounded-xl transition-all shadow-sm">
+                            📁 Browse Files
+                        </button>
+                    </div>
+
+                    <span className="block mt-6 text-xs text-surface-500 font-medium tracking-wide">JPG, JPEG, PNG, WebP · Max 10MB</span>
+
+                    <input ref={cameraInputRef} type="file" accept="image/jpeg,image/jpg,image/png,image/webp" capture="environment" className="hidden" onChange={(e) => handleFile(e.target.files[0])} />
+                    <input ref={uploadInputRef} type="file" accept="image/jpeg,image/jpg,image/png,image/webp" className="hidden" onChange={(e) => handleFile(e.target.files[0])} />
                 </div>
             ) : (
                 <div className="relative space-y-4">

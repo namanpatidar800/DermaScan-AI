@@ -123,36 +123,29 @@ body {
   top: 0px !important;
 }
 
-/* Aggressively hide Google branding */
+/* Hide Google branding but KEEP the select box intact */
 .goog-te-gadget {
   color: transparent !important;
-  font-size: 0 !important;
 }
-.goog-te-gadget img {
-  display: none !important;
-}
-.goog-te-gadget span {
-  display: none !important;
-}
-.goog-logo-link {
+.goog-te-gadget .goog-logo-link {
   display: none !important;
 }
 
-/* Style the actual dropdown specifically */
+/* The actual dropdown styling */
 .goog-te-combo {
   background-color: var(--skinova-white) !important;
   color: var(--skinova-dark) !important;
   border: 1px solid rgba(136, 140, 119, 0.3) !important; 
   border-radius: 8px !important;
   padding: 6px 10px !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   font-weight: 600 !important;
   font-family: 'Inter', system-ui, sans-serif !important;
   outline: none !important;
   cursor: pointer !important;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
   margin: 0 !important;
-  height: 36px !important;
+  height: auto !important;
 }
 
 @keyframes pulse-ring {
