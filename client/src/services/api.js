@@ -1,13 +1,26 @@
 import axios from 'axios';
 
+let base = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Intelligent autocorrect: If user deployed and forgot to add /api (e.g. https://render.com instead of https://render.com/api)
+if (base.startsWith('http') && !base.includes('/api')) {
+    base = base.replace(/\/$/, '') + '/api';
+}
+if (!base.endsWith('/')) {
+    base += '/';
+}
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+    baseURL: base,
     headers: { 'Content-Type': 'application/json' },
 });
 
-// Attach JWT token to every request
 api.interceptors.request.use(
     (config) => {
+        // Prevent Axios from interpreting leading slashes as domain-root overrides (e.g. dropping the /api/ prefix)
+        if (config.url && config.url.startsWith('/')) {
+            config.url = config.url.substring(1);
+        }
+
         const token = localStorage.getItem('skinova_token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;

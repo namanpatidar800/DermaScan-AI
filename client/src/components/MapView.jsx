@@ -21,7 +21,7 @@ const MapView = ({ location, facilities, selectedFacilityId, onMarkerClick }) =>
 
                 const map = new mapboxgl.Map({
                     container: mapContainer.current,
-                    style: 'mapbox://styles/mapbox/dark-v11',
+                    style: 'mapbox://styles/mapbox/satellite-streets-v12',
                     center: [location.lng, location.lat],
                     zoom: 13,
                 });
