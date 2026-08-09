@@ -1,7 +1,7 @@
 export const generateChatResponse = async (req, res) => {
     const { message, conversationHistory } = req.body;
     const apiKey = process.env.AI_API_KEY;
-    const model = process.env.AI_MODEL || 'gemini-1.5-flash';
+    const model = process.env.AI_MODEL || 'gemini-flash-latest';
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
     if (!apiKey) {

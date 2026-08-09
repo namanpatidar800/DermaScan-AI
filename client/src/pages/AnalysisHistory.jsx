@@ -65,7 +65,7 @@ const AnalysisHistory = () => {
                     </p>
                 </div>
                 <Link
-                    to="/analysis"
+                    to="/analysis/new"
                     className="flex items-center justify-center gap-2 px-5 py-2.5 bg-secondary-500 hover:bg-secondary-600 text-white font-semibold rounded-lg transition-all text-sm shadow-sm"
                 >
                     <Plus className="w-4 h-4" /> New Scan
@@ -88,7 +88,7 @@ const AnalysisHistory = () => {
                     <p className="text-surface-600 text-sm mb-6 max-w-sm mx-auto">
                         Your submitted scans will appear here automatically, stored privately on your device.
                     </p>
-                    <Link to="/analysis" className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg transition-all shadow-sm">
+                    <Link to="/analysis/new" className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg transition-all shadow-sm">
                         <Plus className="w-4 h-4" /> Start Your First Scan
                     </Link>
                 </div>

@@ -3,7 +3,7 @@ import AIProvider from './aiProvider.js';
 class GeminiProvider extends AIProvider {
     async analyze(imageUrl, symptoms) {
         const apiKey = process.env.AI_API_KEY;
-        const model = process.env.AI_MODEL || 'gemini-1.5-flash';
+        const model = process.env.AI_MODEL || 'gemini-flash-latest';
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
         const timeoutMs = Number(process.env.AI_TIMEOUT_MS) || 45000;
 

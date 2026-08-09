@@ -1,0 +1,42 @@
+FAIL (404): models/gemini-2.5-flash
+FAIL (429): models/gemini-2.5-pro
+FAIL (429): models/gemini-2.0-flash
+FAIL (429): models/gemini-2.0-flash-001
+FAIL (429): models/gemini-2.0-flash-lite-001
+FAIL (429): models/gemini-2.0-flash-lite
+FAIL (400): models/gemini-2.5-flash-preview-tts
+FAIL (429): models/gemini-2.5-pro-preview-tts
+SUCCESS: models/gemma-4-26b-a4b-it
+SUCCESS: models/gemma-4-31b-it
+SUCCESS: models/gemini-flash-latest
+SUCCESS: models/gemini-flash-lite-latest
+FAIL (429): models/gemini-pro-latest
+FAIL (404): models/gemini-2.5-flash-lite
+FAIL (429): models/gemini-2.5-flash-image
+FAIL (429): models/gemini-3-pro-preview
+SUCCESS: models/gemini-3-flash-preview
+FAIL (429): models/gemini-3.1-pro-preview
+FAIL (429): models/gemini-3.1-pro-preview-customtools
+SUCCESS: models/gemini-3.1-flash-lite-preview
+SUCCESS: models/gemini-3.1-flash-lite
+FAIL (429): models/gemini-3-pro-image-preview
+FAIL (429): models/gemini-3-pro-image
+FAIL (429): models/nano-banana-pro-preview
+FAIL (429): models/gemini-3.1-flash-image-preview
+FAIL (429): models/gemini-3.1-flash-image
+FAIL (429): models/gemini-3.1-flash-lite-image
+FAIL (503): models/gemini-3.5-flash
+SUCCESS: models/gemini-3.5-flash-lite
+FAIL (429): models/gemini-omni-flash-preview
+SUCCESS: models/gemini-3.6-flash
+FAIL (429): models/lyria-3-clip-preview
+FAIL (429): models/lyria-3-pro-preview
+FAIL (400): models/gemini-3.1-flash-tts-preview
+FAIL (404): models/gemini-robotics-er-1.5-preview
+SUCCESS: models/gemini-robotics-er-1.6-preview
+SUCCESS: models/gemini-robotics-er-2-preview
+FAIL (429): models/gemini-2.5-computer-use-preview-10-2025
+FAIL (400): models/antigravity-preview-05-2026
+FAIL (400): models/deep-research-max-preview-04-2026
+FAIL (400): models/deep-research-preview-04-2026
+FAIL (400): models/deep-research-pro-preview-12-2025

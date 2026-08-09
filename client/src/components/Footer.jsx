@@ -12,10 +12,7 @@ const Footer = () => {
                             <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700">
                                 <ScanLine className="w-5 h-5 text-white" />
                             </div>
-                            <span className="text-white font-bold text-lg">
-                                Derma<span className="text-primary-400">Scan</span>
-                                <span className="text-primary-500 text-xs ml-1 font-semibold">AI</span>
-                            </span>
+                            <span className="text-xl font-bold tracking-tight text-white">SKIN<span className="text-primary-400">OVA</span></span>
                         </Link>
                         <p className="text-surface-200 text-sm leading-relaxed max-w-xs">
                             AI-assisted preliminary assessment of visible skin conditions — helping you understand possible

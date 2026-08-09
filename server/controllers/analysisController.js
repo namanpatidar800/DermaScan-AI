@@ -91,13 +91,11 @@ export const getAnalyses = async (req, res, next) => {
     }
 };
 
-// GET /api/analysis/:id — Get single analysis (owner only)
+// GET /api/analysis/:id — Get single analysis
 export const getAnalysisById = async (req, res, next) => {
     try {
-        const analysis = await Analysis.findOne({
-            _id: req.params.id,
-            userId: req.user._id,
-        });
+        // Find strictly by ID. (For anonymous Zero-PII scans, userId is null)
+        const analysis = await Analysis.findById(req.params.id);
 
         if (!analysis) {
             return errorResponse(res, 404, 'Analysis not found');
