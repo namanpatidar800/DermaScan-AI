@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { User, Phone, MapPin, Calendar, ChevronRight, Users, ArrowLeft } from 'lucide-react';
 
-const PatientDetailsForm = ({ onSubmit, onBack, initialData = {} }) => {
+const PatientDetailsForm = ({ onSubmit, onBack, initialData }) => {
+    const data = initialData || {};
     const [formData, setFormData] = useState({
-        fullName: initialData.fullName || '',
-        contactNumber: initialData.contactNumber || '',
-        address: initialData.address || '',
-        gender: initialData.gender || '',
-        dob: initialData.dob || '',
+        fullName: data.fullName || '',
+        contactNumber: data.contactNumber || '',
+        address: data.address || '',
+        gender: data.gender || '',
+        dob: data.dob || '',
     });
 
     const [errors, setErrors] = useState({});
