@@ -1,237 +1,262 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { SKIN_CONDITIONS_DATA } from '../data/skinConditionsData.js';
 import {
-    ScanLine, ArrowRight, Upload, FileText, Zap, MapPin,
-    Shield, Lock, Activity, ChevronRight, Star, Users, TrendingUp
+    ScanLine, ArrowRight, BookOpen, MapPin,
+    Shield, Activity, Info, X, ShieldAlert, Book
 } from 'lucide-react';
 
-const FeatureCard = ({ icon: Icon, title, description }) => (
-    <div className="glass-card p-6 hover:border-primary-500/40 transition-all duration-300 group">
-        <div className="w-12 h-12 rounded-xl bg-primary-500/15 flex items-center justify-center mb-4 group-hover:bg-primary-500/25 transition-colors">
-            <Icon className="w-6 h-6 text-primary-400" />
-        </div>
-        <h3 className="font-semibold text-white mb-2">{title}</h3>
-        <p className="text-surface-200 text-sm leading-relaxed">{description}</p>
-    </div>
-);
-
-const StepCard = ({ number, title, description }) => (
-    <div className="flex gap-4">
-        <div className="shrink-0 w-10 h-10 rounded-full bg-primary-500/20 border border-primary-500/40 flex items-center justify-center text-primary-400 font-bold text-sm">
-            {number}
-        </div>
-        <div>
-            <h4 className="font-semibold text-white mb-1">{title}</h4>
-            <p className="text-surface-200 text-sm leading-relaxed">{description}</p>
-        </div>
-    </div>
-);
-
 const Landing = () => {
-    const { user } = useAuth();
+    const navigate = useNavigate();
+    const [selectedCondition, setSelectedCondition] = useState(null);
 
     return (
-        <div className="overflow-hidden">
-            {/* Hero */}
-            <section className="relative min-h-screen flex items-center justify-center px-4 py-24">
-                {/* Background elements */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl" />
-                    <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary-700/8 rounded-full blur-3xl" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-900/10 rounded-full blur-3xl" />
-                </div>
-
+        <div className="overflow-x-hidden bg-skinova-white selection:bg-skinova-coral/30">
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 border-b border-skinova-bg">
                 <div className="max-w-5xl mx-auto text-center relative z-10">
-                    {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/15 border border-primary-500/30 text-primary-300 text-sm font-medium mb-8 animate-fade-in">
-                        <span className="w-2 h-2 rounded-full bg-primary-400 animate-pulse" />
-                        AI-Assisted Skin Analysis · Demo Mode
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-skinova-bg border border-skinova-olive/20 text-skinova-dark text-xs font-bold tracking-wide uppercase mb-10 shadow-sm animate-fade-in transition-all">
+                        <span className="w-2 h-2 rounded-full bg-skinova-coral animate-pulse" />
+                        AI-Assisted Educational Screening
                     </div>
 
-                    {/* Headline */}
-                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-fade-in-up">
-                        Understand Your{' '}
-                        <span className="gradient-text">Skin.</span>
-                        <br />Earlier.
+                    <h1 className="text-6xl md:text-8xl font-light text-skinova-dark tracking-[0.1em] mb-4 animate-fade-in-up">
+                        <span className="font-semibold">SKIN</span>
+                        <span className="font-semibold text-skinova-coral">OVA</span>
                     </h1>
 
-                    <p className="text-xl text-surface-200 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                        AI-assisted preliminary assessment of visible skin conditions — helping you understand possible concerns
-                        and decide what to do next.
+                    <div className="flex gap-2 justify-center items-center text-[10px] md:text-xs font-bold tracking-[0.2em] text-skinova-olive mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                        <span>DETECT</span>
+                        <span className="text-skinova-coral">•</span>
+                        <span>ANALYZE</span>
+                        <span className="text-skinova-coral">•</span>
+                        <span>CARE</span>
+                    </div>
+
+                    <p className="text-lg md:text-xl text-skinova-olive max-w-2xl mx-auto mb-12 font-light leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                        A premium platform built to help you understand visible skin conditions, track changes, and find professional care when necessary.
                     </p>
 
-                    {/* CTAs */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                         <Link
-                            to={user ? '/analysis/new' : '/register'}
-                            className="flex items-center gap-2 px-8 py-4 bg-primary-500 hover:bg-primary-400 text-white font-semibold rounded-2xl transition-all duration-300 shadow-xl shadow-primary-500/25 hover:shadow-primary-400/35 hover:-translate-y-0.5 text-base"
+                            to="/analysis/new"
+                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 bg-skinova-dark hover:bg-skinova-olive text-skinova-white font-medium rounded-xl transition-all duration-300 shadow-xl shadow-skinova-dark/10 hover:-translate-y-0.5 text-sm uppercase tracking-wider"
                         >
                             <ScanLine className="w-5 h-5" />
-                            Analyze Your Skin
-                            <ArrowRight className="w-4 h-4" />
+                            Scan Your Skin
                         </Link>
                         <Link
-                            to="/how-it-works"
-                            className="flex items-center gap-2 px-8 py-4 bg-surface-800/60 hover:bg-surface-800 text-white font-semibold rounded-2xl transition-all duration-300 border border-white/10 hover:border-white/20 text-base"
+                            to="/ask-skinova"
+                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 bg-skinova-bg hover:bg-skinova-coral/10 text-skinova-dark font-medium rounded-xl transition-all duration-300 border border-skinova-olive/20 text-sm uppercase tracking-wider"
                         >
-                            How It Works
-                            <ChevronRight className="w-4 h-4" />
+                            Ask SKINOVA ✨
+                        </Link>
+                        <Link
+                            to="/find-dermatologist"
+                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 bg-skinova-white hover:bg-skinova-bg text-skinova-coral font-medium rounded-xl transition-all duration-300 border border-skinova-coral/30 text-sm uppercase tracking-wider"
+                        >
+                            Find Care <MapPin className="w-4 h-4" />
                         </Link>
                     </div>
 
-                    {/* Disclaimer */}
-                    <p className="text-xs text-surface-200 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                        ⚕️ AI-assisted information, not a medical diagnosis.{' '}
-                        <Link to="/disclaimer" className="text-primary-400 hover:underline">Learn more</Link>
-                    </p>
-
-                    {/* Stats */}
-                    <div className="grid grid-cols-3 gap-6 max-w-md mx-auto mt-16 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                    <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto mt-20 pt-10 border-t border-skinova-bg animate-fade-in" style={{ animationDelay: '0.5s' }}>
                         {[
-                            { icon: Users, value: 'Preliminary', label: 'Assessment Only' },
-                            { icon: Shield, value: 'Privacy', label: 'Focused Design' },
-                            { icon: Activity, value: 'AI-Powered', label: 'Analysis' },
-                        ].map(({ icon: Icon, value, label }) => (
-                            <div key={label} className="text-center">
-                                <Icon className="w-5 h-5 text-primary-400 mx-auto mb-1" />
-                                <div className="text-white font-bold text-sm">{value}</div>
-                                <div className="text-surface-200 text-xs">{label}</div>
+                            { icon: Shield, label: 'Secure' },
+                            { icon: Activity, label: 'Insightful' },
+                            { icon: BookOpen, label: 'Educational' },
+                        ].map(({ icon: Icon, label }) => (
+                            <div key={label} className="text-center group">
+                                <Icon className="w-6 h-6 text-skinova-olive mx-auto mb-2 opacity-50 group-hover:text-skinova-coral group-hover:opacity-100 transition-colors" />
+                                <div className="text-skinova-dark font-medium text-xs tracking-wide uppercase">{label}</div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Why early awareness */}
-            <section className="py-24 px-4 bg-surface-900/30">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <span className="text-primary-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Early Awareness</span>
-                            <h2 className="text-4xl font-bold text-white mb-6">Why Early Awareness Matters</h2>
-                            <p className="text-surface-200 leading-relaxed mb-6">
-                                Skin conditions are among the most common health concerns globally. Many conditions — if identified
-                                early — can be managed more effectively with appropriate professional care.
-                            </p>
-                            <p className="text-surface-200 leading-relaxed mb-6">
-                                SKINOVA helps you take the first step: understanding what you might be looking at, so you can
-                                make informed decisions about seeking professional evaluation.
-                            </p>
-                            <Link to={user ? '/analysis/new' : '/register'} className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 font-medium transition-colors">
-                                Start your assessment <ArrowRight className="w-4 h-4" />
-                            </Link>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                            {[
-                                { icon: Upload, title: 'Upload Photo', desc: 'Clear, well-lit image of the affected area' },
-                                { icon: FileText, title: 'Describe Symptoms', desc: 'Quick symptom questionnaire for context' },
-                                { icon: Zap, title: 'AI Analysis', desc: 'Preliminary assessment in seconds' },
-                                { icon: MapPin, title: 'Find Care', desc: 'Locate nearby dermatologists' },
-                            ].map(({ icon: Icon, title, desc }) => (
-                                <div key={title} className="glass-card p-5 hover:border-primary-500/30 transition-all duration-300">
-                                    <Icon className="w-6 h-6 text-primary-400 mb-3" />
-                                    <h4 className="font-semibold text-white mb-1 text-sm">{title}</h4>
-                                    <p className="text-surface-200 text-xs leading-relaxed">{desc}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* How it works */}
-            <section className="py-24 px-4">
-                <div className="max-w-4xl mx-auto text-center mb-16">
-                    <span className="text-primary-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Process</span>
-                    <h2 className="text-4xl font-bold text-white mb-4">How SKINOVA Works</h2>
-                    <p className="text-surface-200">Simple, fast, and straightforward — three steps to awareness.</p>
+            <section className="py-24 px-4 bg-skinova-bg">
+                <div className="max-w-6xl mx-auto text-center mb-16">
+                    <span className="text-skinova-coral text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Process</span>
+                    <h2 className="text-3xl font-light text-skinova-dark mb-4 tracking-tight">How SKINOVA Works</h2>
                 </div>
-                <div className="max-w-2xl mx-auto space-y-8">
+                <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     {[
-                        {
-                            number: '01',
-                            title: 'Upload or Capture Image',
-                            description: 'Take a clear photo of the affected skin area or upload an existing image from your device.',
-                        },
-                        {
-                            number: '02',
-                            title: 'Answer Symptom Questions',
-                            description: 'Complete a brief, structured questionnaire about duration, symptoms, and skin changes.',
-                        },
-                        {
-                            number: '03',
-                            title: 'Review AI Assessment',
-                            description: 'Receive a preliminary analysis with possible conditions, observations, and recommended next steps.',
-                        },
+                        { num: '01', title: 'Capture Image', desc: 'Securely upload a photo directly or use your camera.' },
+                        { num: '02', title: 'AI Analysis', desc: 'Our engine identifies possible visual matches and flags concerns.' },
+                        { num: '03', title: 'Find Care', desc: 'Locate nearby dermatology clinics or hospitals instantly.' },
                     ].map((step) => (
-                        <StepCard key={step.number} {...step} />
+                        <div key={step.num} className="bg-skinova-white p-8 rounded-2xl shadow-sm border border-skinova-olive/10 text-left hover:border-skinova-coral-dark/30 transition-colors">
+                            <div className="text-3xl font-bold text-skinova-coral mb-4">{step.num}</div>
+                            <h4 className="font-semibold text-skinova-dark mb-2 text-lg">{step.title}</h4>
+                            <p className="text-skinova-olive text-sm leading-relaxed">{step.desc}</p>
+                        </div>
                     ))}
                 </div>
             </section>
 
-            {/* Features */}
-            <section className="py-24 px-4 bg-surface-900/30">
+            {/* Understand Your Skin (Disease Catalog) */}
+            <section className="py-24 px-4 bg-skinova-white">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <span className="text-primary-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Features</span>
-                        <h2 className="text-4xl font-bold text-white mb-4">Key Features</h2>
-                        <p className="text-surface-200 max-w-xl mx-auto">Built for clarity, privacy, and responsible AI-assisted health awareness.</p>
+                    <div className="mb-12">
+                        <span className="text-skinova-coral text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Education</span>
+                        <h2 className="text-3xl font-light text-skinova-dark mb-4 tracking-tight">Understand Your Skin</h2>
+                        <p className="text-skinova-olive max-w-2xl text-sm leading-relaxed">
+                            Learn about common skin conditions, their typical signs, general care practices, and when professional evaluation is appropriate.
+                        </p>
                     </div>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <FeatureCard
-                            icon={ScanLine}
-                            title="AI-Assisted Analysis"
-                            description="Preliminary skin condition assessment using AI image analysis and symptom data."
-                        />
-                        <FeatureCard
-                            icon={FileText}
-                            title="Symptom Questionnaire"
-                            description="Structured symptom collection to provide better context for the AI assessment."
-                        />
-                        <FeatureCard
-                            icon={MapPin}
-                            title="Find Nearby Dermatologists"
-                            description="Locate qualified dermatologists and healthcare facilities using your location."
-                        />
-                        <FeatureCard
-                            icon={Activity}
-                            title="Analysis History"
-                            description="Review and track your previous skin analyses over time in one secure place."
-                        />
-                        <FeatureCard
-                            icon={Shield}
-                            title="Privacy-Focused"
-                            description="Your health data is private. Images and analyses are linked only to your account."
-                        />
-                        <FeatureCard
-                            icon={Lock}
-                            title="Responsible AI"
-                            description="Clear disclaimers, confidence indicators, and responsible language throughout."
-                        />
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {SKIN_CONDITIONS_DATA.map((condition) => (
+                            <button
+                                key={condition.id}
+                                onClick={() => setSelectedCondition(condition)}
+                                className="group text-left bg-skinova-bg rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-skinova-dark/5 transition-all duration-300 flex flex-col h-full border border-transparent hover:border-skinova-olive/20"
+                            >
+                                <div className="h-48 overflow-hidden bg-skinova-olive/10 relative">
+                                    <img
+                                        src={condition.image}
+                                        alt={condition.name}
+                                        loading="lazy"
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-skinova-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                        <span className="text-white text-xs font-bold tracking-wide uppercase flex items-center gap-1">
+                                            Learn More <ArrowRight className="w-3 h-3" />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="p-5 flex flex-col flex-1">
+                                    <h3 className="font-semibold text-skinova-dark mb-2 text-lg">{condition.name}</h3>
+                                    <p className="text-skinova-olive text-xs leading-relaxed line-clamp-3 mb-4 flex-1">
+                                        {condition.shortDesc}
+                                    </p>
+                                </div>
+                            </button>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-24 px-4">
-                <div className="max-w-3xl mx-auto text-center">
-                    <div className="glass-card p-12 border border-primary-500/20 shadow-2xl shadow-primary-500/5">
-                        <h2 className="text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
-                        <p className="text-surface-200 mb-8 leading-relaxed">
-                            Create a free account and start your first AI-assisted skin assessment in under 3 minutes.
-                        </p>
-                        <Link
-                            to={user ? '/analysis/new' : '/register'}
-                            className="inline-flex items-center gap-2 px-10 py-4 bg-primary-500 hover:bg-primary-400 text-white font-semibold rounded-2xl transition-all duration-300 shadow-xl shadow-primary-500/20 hover:-translate-y-0.5 text-base"
-                        >
-                            <ScanLine className="w-5 h-5" />
-                            {user ? 'Start New Analysis' : 'Create Free Account'}
-                            <ArrowRight className="w-4 h-4" />
-                        </Link>
-                        <p className="text-xs text-surface-200 mt-6">
-                            ⚕️ For informational purposes only — not a substitute for professional medical advice.
-                        </p>
+            {/* Disease Detail Modal */}
+            {selectedCondition && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 bg-skinova-dark/60 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-skinova-white rounded-3xl w-full max-w-4xl max-h-full overflow-hidden shadow-2xl flex flex-col relative border border-skinova-olive/20 animate-fade-in-up">
+
+                        {/* Header Image & Title */}
+                        <div className="relative h-48 sm:h-64 shrink-0">
+                            <img src={selectedCondition.image} alt="" className="w-full h-full object-cover" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-skinova-dark to-transparent"></div>
+                            <button
+                                onClick={() => setSelectedCondition(null)}
+                                className="absolute top-4 right-4 bg-skinova-white/20 hover:bg-skinova-white/40 backdrop-blur-md p-2 rounded-full text-white transition-colors"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                            <div className="absolute bottom-6 left-6 pr-6">
+                                <h2 className="text-3xl sm:text-4xl font-light text-white tracking-tight">{selectedCondition.name}</h2>
+                            </div>
+                        </div>
+
+                        {/* Scrolling Content */}
+                        <div className="p-6 sm:p-10 overflow-y-auto bg-skinova-white text-skinova-dark flex-1">
+
+                            <div className="grid md:grid-cols-2 gap-10">
+
+                                {/* Left Col */}    
+                                <div className="space-y-8">
+                                    <section>
+                                        <h4 className="text-xs font-bold tracking-widest text-skinova-coral uppercase mb-3 flex items-center gap-2"><Info className="w-4 h-4" /> What is it?</h4>
+                                        <p className="text-sm leading-relaxed text-skinova-olive">{selectedCondition.whatIsIt}</p>
+                                    </section>
+                                    <section>
+                                        <h4 className="text-xs font-bold tracking-widest text-skinova-dark uppercase mb-3">Common Signs</h4>
+                                        <ul className="space-y-2">
+                                            {selectedCondition.commonSigns.map((s, i) => (
+                                                <li key={i} className="flex gap-2 text-sm text-skinova-olive">
+                                                    <span className="text-skinova-coral/50 font-bold">•</span> {s}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                    <section>
+                                        <h4 className="text-xs font-bold tracking-widest text-skinova-dark uppercase mb-3">Contributing Factors</h4>
+                                        <ul className="space-y-2">
+                                            {selectedCondition.contributingFactors.map((s, i) => (
+                                                <li key={i} className="flex gap-2 text-sm text-skinova-olive">
+                                                    <span className="text-skinova-coral/50 font-bold">•</span> {s}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                </div>
+
+                                {/* Right Col */}
+                                <div className="space-y-8">
+                                    <section className="bg-skinova-bg p-5 rounded-2xl border border-skinova-olive/10">
+                                        <h4 className="text-xs font-bold tracking-widest text-skinova-dark uppercase mb-3">General Care</h4>
+                                        <ul className="space-y-2">
+                                            {selectedCondition.generalCare.map((s, i) => (
+                                                <li key={i} className="flex gap-2 text-sm text-skinova-olive">
+                                                    <span className="text-skinova-coral/50 font-bold">•</span> {s}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+
+                                    <section>
+                                        <h4 className="text-xs font-bold tracking-widest text-skinova-coral-dark uppercase mb-3 flex items-center gap-2"><ShieldAlert className="w-4 h-4" /> Precautions</h4>
+                                        <ul className="space-y-2">
+                                            {selectedCondition.precautions.map((s, i) => (
+                                                <li key={i} className="flex gap-2 text-sm text-skinova-olive">
+                                                    <span className="text-skinova-coral-dark font-bold">•</span> {s}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+
+                                    <section className="bg-skinova-dark text-white p-5 rounded-2xl">
+                                        <h4 className="text-xs font-bold tracking-widest text-skinova-coral uppercase mb-2">When to seek professional care</h4>
+                                        <p className="text-sm font-light leading-relaxed">{selectedCondition.whenToSeekCare}</p>
+                                    </section>
+                                </div>
+                            </div>
+
+                            <hr className="my-8 border-skinova-bg" />
+
+                            <p className="text-xs text-skinova-olive text-center max-w-3xl mx-auto mb-8 leading-relaxed italic">
+                                {selectedCondition.disclaimer}
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <button
+                                    onClick={() => navigate('/ask-skinova', { state: { initialMsg: `Explain more about ${selectedCondition.name}, its signs, general care, and when to get professional help.` } })}
+                                    className="bg-skinova-bg hover:bg-skinova-olive/10 border border-skinova-olive/20 text-skinova-dark px-6 py-3 rounded-xl text-sm font-semibold tracking-wide transition-colors flex items-center justify-center gap-2"
+                                >
+                                    Ask SKINOVA about {selectedCondition.name} ✨
+                                </button>
+                                <button
+                                    onClick={() => navigate('/find-dermatologist')}
+                                    className="bg-skinova-coral hover:bg-skinova-coral-dark text-white px-6 py-3 rounded-xl text-sm font-semibold tracking-wide shadow-md transition-colors flex items-center justify-center gap-2"
+                                >
+                                    Find a Dermatologist <MapPin className="w-4 h-4" />
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
+                </div>
+            )}
+
+            {/* Disclaimer Footer */}
+            <section className="py-12 bg-skinova-dark text-skinova-white text-center px-4">
+                <div className="max-w-2xl mx-auto">
+                    <Book className="w-6 h-6 text-skinova-coral mx-auto mb-4" />
+                    <p className="text-xs leading-relaxed text-skinova-olive/80">
+                        ⚕️ SKINOVA provides AI-assisted educational information only, not an official medical diagnosis.
+                        Do not use this tool to replace the advice of a board-certified dermatologist.
+                        If you are experiencing severe symptoms, please seek emergency medical attention.
+                    </p>
                 </div>
             </section>
         </div>

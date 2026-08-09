@@ -22,7 +22,7 @@
 ---
 
 ## 📖 Overview
-**SKINOVA** bridges the gap between everyday skin concerns and preliminary assessments. Built during a Hackathon, this full-stack application allows users to securely upload photos of skin lesions, submit a structured medical questionnaire, and dynamically receive an AI-generated preliminary report alongside interactive geolocations of nearby certified Dermatologists.
+**SKINOVA** bridges the gap between everyday skin concerns and preliminary assessments. This full-stack application allows users to securely upload photos of skin lesions, submit a structured medical questionnaire, and dynamically receive an AI-generated preliminary report alongside interactive geolocations of nearby certified Dermatologists.
 
 <div align="center">
   *(Add your beautiful dashboard/result screenshots here!)*
@@ -122,5 +122,5 @@ Navigate to your provided Vite network URL (e.g., `http://localhost:5173` or `51
 ---
 
 <div align="center">
-  Made with ❤️ for Hackathons by [Your Name/Team].
+  Made with ❤️ by [Your Name].
 </div>

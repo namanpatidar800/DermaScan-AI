@@ -39,7 +39,9 @@ User Query: ${message}
         });
 
         if (!response.ok) {
-            throw new Error('Gemini upstream failed during chat generation');
+            const errorBody = await response.text();
+            console.error('Gemini Upstream Failure Body:', errorBody);
+            throw new Error(`Gemini upstream failed during chat generation: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();

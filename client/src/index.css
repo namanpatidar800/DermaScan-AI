@@ -1,31 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 
+:root {
+  --skinova-dark: #354032;
+  --skinova-olive: #888C77;
+  --skinova-coral: #D98E7E;
+  --skinova-coral-dark: #D97B73;
+  --skinova-bg: #F2F2F2;
+  --skinova-white: #FFFFFF;
+}
+
 @theme {
-  --color-primary-50: #F4F6F4;
-  --color-primary-100: #E3E7E1;
-  --color-primary-200: #C7CFC5;
-  --color-primary-300: #A2AFA0;
-  --color-primary-400: #7B8C78;
-  --color-primary-500: #5D6C58;
-  --color-primary-600: #465242;
-  --color-primary-700: #343F31;
-  --color-primary-800: #2C3529;
-  --color-primary-900: #252D23;
-  --color-primary-950: #171C15;
+  /* Exact SKINOVA Tokens */
+  --color-skinova-dark: var(--skinova-dark);
+  --color-skinova-olive: var(--skinova-olive);
+  --color-skinova-coral: var(--skinova-coral);
+  --color-skinova-coral-dark: var(--skinova-coral-dark);
+  --color-skinova-bg: var(--skinova-bg);
+  --color-skinova-white: var(--skinova-white);
 
-  --color-secondary-50: #FDF7F6;
-  --color-secondary-400: #D8A59C;
-  --color-secondary-500: #CD9185;
-  --color-secondary-600: #B87C71;
+  /* Overriding old primary/surface mapping for backwards safety */
+  --color-primary-50: var(--skinova-bg);
+  --color-primary-100: var(--skinova-bg);
+  --color-primary-200: var(--skinova-olive);
+  --color-primary-300: var(--skinova-olive);
+  --color-primary-400: var(--skinova-olive);
+  --color-primary-500: var(--skinova-dark);
+  --color-primary-600: var(--skinova-dark);
+  --color-primary-700: var(--skinova-dark);
+  --color-primary-800: var(--skinova-dark);
+  --color-primary-900: var(--skinova-dark);
+  --color-primary-950: var(--skinova-dark);
 
-  --color-surface-50: #FFFFFF;
-  --color-surface-100: #FBFBF9;
-  --color-surface-200: #F2F3F0;
-  --color-surface-300: #E5E7EB;
-  --color-surface-800: #5F6762;
-  --color-surface-900: #343F38;
-  --color-surface-950: #1D2420;
+  --color-secondary-50: var(--skinova-white);
+  --color-secondary-400: var(--skinova-coral);
+  --color-secondary-500: var(--skinova-coral);
+  --color-secondary-600: var(--skinova-coral-dark);
+
+  --color-surface-50: var(--skinova-white);
+  --color-surface-100: var(--skinova-bg);
+  --color-surface-200: var(--skinova-bg);
+  --color-surface-300: var(--skinova-olive);
+  --color-surface-800: var(--skinova-olive);
+  --color-surface-900: var(--skinova-dark);
+  --color-surface-950: var(--skinova-dark);
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -42,8 +60,8 @@ html {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #FBFBF9;
-  color: #343F38;
+  background-color: var(--skinova-bg);
+  color: var(--skinova-dark);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -88,6 +106,43 @@ body {
   to {
     opacity: 1;
   }
+}
+
+/* 
+=============================================
+  GOOGLE TRANSLATE WIDGET OVERRIDES (Hackathon multi-language trick)
+=============================================
+*/
+/* Hide the Google Translate Banner at the top */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+/* Hide the top margin injected by the Google script */
+body {
+  top: 0px !important;
+}
+
+/* Style the dropdown cleanly */
+#google_translate_element select {
+  background-color: var(--skinova-bg);
+  color: var(--skinova-dark);
+  border: 1px solid rgba(136, 140, 119, 0.3);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Hide the Google Logo in the dropdown */
+.goog-logo-link {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  color: transparent !important;
 }
 
 @keyframes pulse-ring {
@@ -147,8 +202,10 @@ body {
 .glass-card {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(123, 140, 120, 0.15); /* Soft sage border */
-  box-shadow: 0 4px 24px -4px rgba(42, 54, 44, 0.05); /* Soft charcoal shadow */
+  border: 1px solid rgba(123, 140, 120, 0.15);
+  /* Soft sage border */
+  box-shadow: 0 4px 24px -4px rgba(42, 54, 44, 0.05);
+  /* Soft charcoal shadow */
   border-radius: 16px;
 }
 

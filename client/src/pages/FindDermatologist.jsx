@@ -75,11 +75,11 @@ const FindDermatologist = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8 md:py-10">
+        <div className="max-w-7xl mx-auto px-4 py-8 md:py-10 bg-skinova-bg">
             {/* Header */}
             <div className="mb-6 md:mb-8 text-center md:text-left">
-                <h1 className="text-2xl md:text-3xl font-bold text-surface-900 mb-3 tracking-tight">Find Care Nearby</h1>
-                <p className="text-surface-600 text-sm max-w-2xl mx-auto md:mx-0">
+                <h1 className="text-2xl md:text-3xl font-light text-skinova-dark mb-3 tracking-tight">Find Care Nearby</h1>
+                <p className="text-skinova-olive text-sm max-w-2xl mx-auto md:mx-0">
                     Find nearby dermatologists and healthcare facilities based on your location.
                     Search manually if location access is unavailable.
                 </p>
@@ -111,7 +111,7 @@ const FindDermatologist = () => {
                     <button
                         type="submit"
                         disabled={loadingLocation || !manualQuery.trim()}
-                        className="absolute right-2 px-4 py-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50 transition-colors shadow-sm"
+                        className="absolute right-2 px-4 py-1.5 bg-skinova-dark hover:bg-skinova-olive text-white rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50 transition-colors shadow-sm"
                     >
                         Search
                     </button>
@@ -122,9 +122,9 @@ const FindDermatologist = () => {
                     <button
                         onClick={handleUseMyLocation}
                         disabled={loadingLocation}
-                        className="w-full h-full min-h-[48px] flex items-center justify-center gap-2 px-4 bg-white hover:bg-surface-50 border border-surface-300 rounded-xl text-surface-700 text-sm font-bold transition-all disabled:opacity-50 shadow-sm hover:shadow"
+                        className="w-full h-full min-h-[48px] flex items-center justify-center gap-2 px-4 bg-skinova-white hover:bg-skinova-bg border border-skinova-olive/30 rounded-xl text-skinova-dark text-sm font-bold transition-all disabled:opacity-50 shadow-sm hover:shadow"
                     >
-                        {loadingLocation ? <Loader2 className="w-4 h-4 animate-spin" /> : <Compass className="w-4 h-4 text-primary-500" />}
+                        {loadingLocation ? <Loader2 className="w-4 h-4 animate-spin" /> : <Compass className="w-4 h-4 text-skinova-coral" />}
                         Use My Location
                     </button>
                 </div>
@@ -156,10 +156,10 @@ const FindDermatologist = () => {
                             <p className="text-xs font-medium text-surface-500 mt-1">Showing {facilities.length} results</p>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto w-full p-4 space-y-4 scrollbar-thin scrollbar-thumb-surface-300 scrollbar-track-transparent">
+                        <div className="flex-1 overflow-y-auto w-full p-4 space-y-4 scrollbar-thin scrollbar-thumb-skinova-olive/20 scrollbar-track-transparent">
                             {loadingFacilities ? (
-                                <div className="flex flex-col items-center justify-center py-12 text-surface-500">
-                                    <Loader2 className="w-8 h-8 animate-spin text-primary-500 mb-4" />
+                                <div className="flex flex-col items-center justify-center py-12 text-skinova-olive">
+                                    <Loader2 className="w-8 h-8 animate-spin text-skinova-coral mb-4" />
                                     <span className="text-sm font-medium">Searching facilities...</span>
                                 </div>
                             ) : facilities.length === 0 ? (
@@ -196,18 +196,18 @@ const FindDermatologist = () => {
 
                         {/* Map Overlay Loading State */}
                         {loadingLocation && (
-                            <div className="absolute inset-0 bg-white/70 backdrop-blur-sm flex flex-col items-center justify-center z-20">
-                                <Loader2 className="w-10 h-10 text-primary-600 animate-spin mb-3 shadow-sm rounded-full bg-white" />
-                                <span className="text-surface-900 font-bold text-sm">Finding map location...</span>
+                            <div className="absolute inset-0 bg-skinova-white/70 backdrop-blur-sm flex flex-col items-center justify-center z-20">
+                                <Loader2 className="w-10 h-10 text-skinova-coral animate-spin mb-3 shadow-sm rounded-full bg-white" />
+                                <span className="text-skinova-dark font-bold text-sm">Finding map location...</span>
                             </div>
                         )}
                     </div>
                 </div>
             ) : (
                 /* Empty state when no base location exists */
-                <div className="border-2 border-surface-200 border-dashed rounded-3xl flex flex-col items-center justify-center py-24 px-4 text-center bg-surface-50/50">
-                    <div className="w-16 h-16 rounded-full bg-white border border-surface-200 shadow-sm flex items-center justify-center mb-6">
-                        <MapPin className="w-8 h-8 text-primary-500" />
+                <div className="border border-skinova-olive/20 border-dashed rounded-3xl flex flex-col items-center justify-center py-24 px-4 text-center bg-skinova-white/50">
+                    <div className="w-16 h-16 rounded-full bg-skinova-bg border border-skinova-olive/10 shadow-sm flex items-center justify-center mb-6">
+                        <MapPin className="w-8 h-8 text-skinova-coral" />
                     </div>
                     <h2 className="text-xl font-bold text-surface-900 mb-3">Location Required</h2>
                     {hasAttemptedAutoLocation && error ? (

@@ -5,9 +5,9 @@ const HowItWorks = () => (
     <div className="py-24 px-4">
         <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-                <span className="text-primary-400 text-sm font-semibold uppercase tracking-widest mb-4 block">The Process</span>
-                <h1 className="text-4xl font-bold text-white mb-4">How SKINOVA Works</h1>
-                <p className="text-surface-200 max-w-xl mx-auto">
+                <span className="text-skinova-coral text-xs font-bold uppercase tracking-[0.2em] mb-4 block">The Process</span>
+                <h1 className="text-3xl md:text-4xl font-light text-skinova-dark tracking-tight mb-4">How SKINOVA Works</h1>
+                <p className="text-skinova-olive max-w-xl mx-auto text-sm leading-relaxed">
                     A simple, step-by-step process from photo to preliminary assessment.
                 </p>
             </div>
@@ -50,23 +50,23 @@ const HowItWorks = () => (
                         tips: ['View facility details and specialties', 'Get directions', 'Always consult a professional for diagnosis'],
                     },
                 ].map(({ step, icon: Icon, title, description, tips }) => (
-                    <div key={step} className="glass-card p-8 border border-white/8 hover:border-primary-500/30 transition-all">
-                        <div className="flex gap-6">
+                    <div key={step} className="bg-skinova-white p-6 md:p-8 rounded-3xl border border-skinova-olive/10 hover:border-skinova-olive/30 shadow-sm hover:shadow-md transition-all">
+                        <div className="flex flex-col sm:flex-row gap-6">
                             <div className="shrink-0">
-                                <div className="w-14 h-14 rounded-2xl bg-primary-500/15 border border-primary-500/30 flex items-center justify-center">
-                                    <Icon className="w-7 h-7 text-primary-400" />
+                                <div className="w-14 h-14 rounded-2xl bg-skinova-bg border border-skinova-olive/20 flex items-center justify-center shadow-sm">
+                                    <Icon className="w-6 h-6 text-skinova-dark" />
                                 </div>
                             </div>
                             <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-3">
-                                    <span className="text-xs font-bold text-primary-500 bg-primary-500/10 border border-primary-500/20 px-2.5 py-1 rounded-full">Step {step}</span>
-                                    <h3 className="font-semibold text-white">{title}</h3>
+                                    <span className="text-[10px] font-bold text-skinova-coral bg-skinova-bg border border-skinova-olive/20 px-3 py-1 rounded-full uppercase tracking-wider">Step {step}</span>
+                                    <h3 className="font-semibold text-skinova-dark text-lg">{title}</h3>
                                 </div>
-                                <p className="text-surface-200 text-sm leading-relaxed mb-4">{description}</p>
-                                <ul className="space-y-1.5">
+                                <p className="text-skinova-olive text-sm leading-relaxed mb-4">{description}</p>
+                                <ul className="space-y-2">
                                     {tips.map((tip) => (
-                                        <li key={tip} className="flex items-center gap-2 text-xs text-surface-200">
-                                            <CheckCircle className="w-3.5 h-3.5 text-primary-400 shrink-0" />
+                                        <li key={tip} className="flex items-center gap-2 text-xs md:text-sm text-skinova-olive font-medium">
+                                            <CheckCircle className="w-4 h-4 text-skinova-coral shrink-0" />
                                             {tip}
                                         </li>
                                     ))}
@@ -77,16 +77,16 @@ const HowItWorks = () => (
                 ))}
             </div>
 
-            <div className="glass-card p-8 border border-yellow-500/20 bg-yellow-500/5 text-center">
-                <h3 className="font-semibold text-yellow-300 mb-2">Important Reminder</h3>
-                <p className="text-yellow-200/80 text-sm leading-relaxed mb-6">
+            <div className="bg-orange-50 rounded-3xl p-8 border border-orange-200 text-center shadow-sm">
+                <h3 className="font-semibold text-orange-900 mb-2">Important Reminder</h3>
+                <p className="text-orange-800 text-sm leading-relaxed mb-8 max-w-2xl mx-auto">
                     SKINOVA is <strong>not a medical diagnostic tool</strong>. It provides preliminary information
                     to help you decide whether to seek professional care. Always consult a qualified dermatologist or
                     healthcare professional for proper diagnosis and treatment.
                 </p>
                 <Link
-                    to="/register"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 hover:bg-primary-400 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-primary-500/20"
+                    to="/analysis/new"
+                    className="inline-flex items-center gap-2 px-8 py-3.5 bg-skinova-dark hover:bg-skinova-olive text-white text-sm font-semibold rounded-xl transition-all shadow-md uppercase tracking-wide"
                 >
                     Get Started <ArrowRight className="w-4 h-4" />
                 </Link>

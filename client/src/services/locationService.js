@@ -33,14 +33,11 @@ export const geocodeLocation = async (query) => {
 export const searchNearbyFacilities = async (lat, lng, radiusKm = 5) => {
     if (!MAPBOX_TOKEN) throw new Error('Map service is not configured.');
 
-    // Mapbox search API (using geocoding API for POI search focused around coordinate)
-    // Categories: hospital, clinic, medical
-    const query = encodeURIComponent('dermatologist clinic hospital');
-    // Bounding box approximation for radius (very rough) or just rely on proximity via `proximity` param.
-    // The Mapbox Geocoding api uses proximity.
+    // Widening the search query to capture major hospitals or direct clinics
+    const query = encodeURIComponent('dermatologist, hospital, clinic, medical');
 
-    // For true category search we'd use Mapbox Search API, but Geocoding API supports POIs well enough for a hackathon:
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?proximity=${lng},${lat}&types=poi&limit=15&access_token=${MAPBOX_TOKEN}`;
+    // the Geocoding API uses proximity for POIs.
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?proximity=${lng},${lat}&types=poi&limit=25&access_token=${MAPBOX_TOKEN}`;
 
     const res = await fetch(url);
     const data = await res.json();
@@ -59,8 +56,8 @@ export const searchNearbyFacilities = async (lat, lng, radiusKm = 5) => {
         return {
             id: f.id,
             name: f.text,
-            address: f.properties.address || f.place_name,
-            category: f.properties.category || 'Healthcare facility',
+            address: f.properties.address ? `${f.properties.address}` : f.place_name.split(',').slice(1).join(',').trim(),
+            category: f.properties.category || 'Healthcare Facility',
             phone: f.properties.tel || null,
             website: null,
             lat: f.center[1],

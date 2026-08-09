@@ -136,22 +136,26 @@ const AnalysisResult = () => {
             <div ref={reportRef} className="bg-white rounded-2xl shadow-xl border border-surface-200 overflow-hidden font-sans">
 
                 {/* Header */}
-                <div className="bg-surface-900 p-6 md:p-8 flex justify-between items-center text-white">
-                    <div>
-                        <div className="flex items-center gap-2 mb-1 opacity-90">
-                            <span className="text-xs font-bold tracking-widest uppercase bg-white/20 px-2 py-0.5 rounded text-white">SKINOVA REPORT</span>
+                <div className="bg-skinova-dark p-6 md:p-8 flex justify-between items-center text-white border-b-4 border-skinova-coral">
+                    <div className="flex gap-4 items-center">
+                        <img src="/skinova-logo1.png" crossOrigin="anonymous" alt="SKINOVA Logo" className="h-14 w-auto rounded-xl object-contain mix-blend-screen bg-skinova-white p-1" />
+                        <div>
+                            <div className="text-2xl font-light tracking-[0.1em] leading-none mb-1">
+                                <span className="text-white font-semibold">SKIN</span>
+                                <span className="text-skinova-coral font-semibold">OVA</span>
+                            </div>
+                            <h1 className="text-xl font-bold tracking-tight">Skin Health Assessment</h1>
+                            <p className="text-skinova-olive text-xs mt-0.5 max-w-sm">AI-assisted screening based on visual mapping and patient context.</p>
                         </div>
-                        <h1 className="text-2xl font-bold">Skin Health Assessment</h1>
-                        <p className="text-surface-300 text-sm mt-1 max-w-sm">AI-assisted screening based on visual mapping and patient context.</p>
                     </div>
                     <div className="text-right">
-                        <div className="text-2xl font-bold font-mono tracking-wider">{caseId}</div>
-                        <p className="text-surface-400 text-xs font-mono uppercase mt-1">{new Date(createdAt).toLocaleDateString()} • Anonymous</p>
+                        <div className="text-2xl font-bold font-mono tracking-wider text-white">{caseId}</div>
+                        <p className="text-skinova-olive text-xs font-mono uppercase mt-1">{new Date(createdAt).toLocaleDateString()} • Anonymous</p>
                     </div>
                 </div>
 
                 {/* Visible Safety Layer */}
-                <div className="border-b border-surface-200 bg-surface-50 p-4">
+                <div className="border-b border-skinova-olive/20 bg-skinova-bg p-4">
                     <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center max-w-3xl mx-auto text-xs font-medium text-surface-600 uppercase tracking-wide">
                         <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-primary-500" /> Image Quality Evaluated</span>
                         <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-primary-500" /> Uncertainty Bounds Applied</span>
