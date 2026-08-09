@@ -114,7 +114,7 @@ const Landing = () => {
                                 early — can be managed more effectively with appropriate professional care.
                             </p>
                             <p className="text-surface-200 leading-relaxed mb-6">
-                                DermaScan AI helps you take the first step: understanding what you might be looking at, so you can
+                                SKINOVA helps you take the first step: understanding what you might be looking at, so you can
                                 make informed decisions about seeking professional evaluation.
                             </p>
                             <Link to={user ? '/analysis/new' : '/register'} className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 font-medium transition-colors">
@@ -143,7 +143,7 @@ const Landing = () => {
             <section className="py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center mb-16">
                     <span className="text-primary-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Process</span>
-                    <h2 className="text-4xl font-bold text-white mb-4">How DermaScan Works</h2>
+                    <h2 className="text-4xl font-bold text-white mb-4">How SKINOVA Works</h2>
                     <p className="text-surface-200">Simple, fast, and straightforward — three steps to awareness.</p>
                 </div>
                 <div className="max-w-2xl mx-auto space-y-8">

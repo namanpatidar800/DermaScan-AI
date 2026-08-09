@@ -32,7 +32,7 @@ const Footer = () => {
                         <ul className="space-y-2.5">
                             {[
                                 { to: '/how-it-works', label: 'How It Works' },
-                                { to: '/about', label: 'About DermaScan' },
+                                { to: '/about', label: 'About SKINOVA' },
                                 { to: '/register', label: 'Get Started' },
                                 { to: '/find-dermatologist', label: 'Find a Dermatologist' },
                             ].map((link) => (
@@ -65,14 +65,14 @@ const Footer = () => {
                 {/* Disclaimer bar */}
                 <div className="border-t border-white/5 pt-6">
                     <p className="text-xs text-surface-200 text-center mb-4 leading-relaxed max-w-3xl mx-auto">
-                        <strong className="text-yellow-400">Important Disclaimer:</strong> DermaScan AI provides AI-assisted
+                        <strong className="text-yellow-400">Important Disclaimer:</strong> SKINOVA provides AI-assisted
                         preliminary information only. It is NOT a substitute for professional medical advice, diagnosis, or
                         treatment. Always consult a qualified healthcare professional for proper diagnosis and treatment.
                     </p>
                     <div className="flex items-center justify-center gap-1 text-xs text-surface-200">
                         <span>Made with</span>
                         <Heart className="w-3 h-3 text-red-400 fill-current" />
-                        <span>for better skin health awareness · DermaScan AI © {new Date().getFullYear()}</span>
+                        <span>for better skin health awareness · SKINOVA © {new Date().getFullYear()}</span>
                     </div>
                 </div>
             </div>

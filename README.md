@@ -1,6 +1,6 @@
 <div align="center">
   
-  # 🩺 DermaScan AI
+  # 🩺 SKINOVA
   **An Intelligent, AI-Assisted Preliminary Skin Health Assessment Platform**
 
   [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -16,13 +16,13 @@
 ---
 
 ## 🌐 Live Link
-> **Try out DermaScan AI Live:**
-> 👉 **[https://dermascan-ai-iwt7.onrender.com/](https://dermascan-ai-iwt7.onrender.com/)**
+> **Try out SKINOVA Live:**
+> 👉 **[https://skinova-iwt7.onrender.com/](https://skinova-iwt7.onrender.com/)**
 
 ---
 
 ## 📖 Overview
-**DermaScan AI** bridges the gap between everyday skin concerns and preliminary assessments. Built during a Hackathon, this full-stack application allows users to securely upload photos of skin lesions, submit a structured medical questionnaire, and dynamically receive an AI-generated preliminary report alongside interactive geolocations of nearby certified Dermatologists.
+**SKINOVA** bridges the gap between everyday skin concerns and preliminary assessments. Built during a Hackathon, this full-stack application allows users to securely upload photos of skin lesions, submit a structured medical questionnaire, and dynamically receive an AI-generated preliminary report alongside interactive geolocations of nearby certified Dermatologists.
 
 <div align="center">
   *(Add your beautiful dashboard/result screenshots here!)*
@@ -31,7 +31,7 @@
 ---
 
 ## ⚠️ Important Medical Disclaimer
-**DermaScan AI is NOT a substitute for professional medical care.**
+**SKINOVA is NOT a substitute for professional medical care.**
 Results are strictly informational estimations provided by large language models (LLMs). The software **must never** be used to prescribe medication, start, stop, or alter a treatment plan, nor determine the absolute malignancy of lesions. Always consult a qualified healthcare professional.
 
 ---
@@ -64,8 +64,8 @@ Results are strictly informational estimations provided by large language models
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/your-username/DermaScan-AI.git
-cd DermaScan-AI
+git clone https://github.com/your-username/SKINOVA-AI.git
+cd SKINOVA-AI
 ```
 
 ### 3. Install Dependencies

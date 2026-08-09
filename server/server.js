@@ -14,7 +14,7 @@ const startServer = async () => {
         }
 
         app.listen(PORT, '0.0.0.0', () => {
-            console.log(`🚀 DermaScan AI Server running on port ${PORT}`);
+            console.log(`🚀 SKINOVA Server running on port ${PORT}`);
             console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
             console.log(`🤖 AI Provider: ${process.env.AI_PROVIDER || 'mock'}`);
             console.log(`🌐 API: http://localhost:${PORT}/api`);

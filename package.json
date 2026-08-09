@@ -1,7 +1,7 @@
 {
-    "name": "dermascan-ai",
+    "name": "skinova",
     "version": "1.0.0",
-    "description": "DermaScan AI — AI-assisted preliminary skin condition assessment platform",
+    "description": "SKINOVA — AI-assisted preliminary skin condition assessment platform",
     "private": true,
     "scripts": {
         "dev:server": "cd server && npm run dev",

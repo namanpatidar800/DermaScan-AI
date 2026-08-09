@@ -19,7 +19,7 @@ const Disclaimer = ({ variant = 'default' }) => {
                 <div>
                     <h4 className="font-semibold text-yellow-300 mb-1 text-sm">Important Medical Disclaimer</h4>
                     <p className="text-xs text-yellow-200/80 leading-relaxed">
-                        DermaScan AI provides an <strong>AI-assisted preliminary assessment</strong> only — it is{' '}
+                        SKINOVA provides an <strong>AI-assisted preliminary assessment</strong> only — it is{' '}
                         <strong>NOT a medical diagnosis</strong>. Results should not be used as a substitute for professional
                         medical advice, examination, or treatment. Always consult a qualified dermatologist or healthcare
                         provider for proper diagnosis and treatment of skin conditions.

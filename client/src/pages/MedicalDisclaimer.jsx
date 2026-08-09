@@ -8,18 +8,18 @@ const MedicalDisclaimer = () => (
                     <AlertTriangle className="w-8 h-8 text-yellow-400" />
                 </div>
                 <h1 className="text-4xl font-bold text-white mb-4">Medical Disclaimer</h1>
-                <p className="text-surface-200">Please read this carefully before using DermaScan AI.</p>
+                <p className="text-surface-200">Please read this carefully before using SKINOVA.</p>
             </div>
 
             <div className="space-y-6">
                 {[
                     {
                         title: 'Not a Medical Diagnosis',
-                        content: 'DermaScan AI provides AI-assisted preliminary assessments for informational purposes only. The information provided by DermaScan AI does NOT constitute medical advice, diagnosis, or treatment recommendations. Results are not a substitute for professional medical evaluation.',
+                        content: 'SKINOVA provides AI-assisted preliminary assessments for informational purposes only. The information provided by SKINOVA does NOT constitute medical advice, diagnosis, or treatment recommendations. Results are not a substitute for professional medical evaluation.',
                     },
                     {
                         title: 'Consult a Healthcare Professional',
-                        content: 'Always seek the advice of a qualified dermatologist, physician, or other licensed healthcare provider with any questions you may have regarding a medical condition. Do not delay in seeking professional medical advice or disregard professional medical advice based on information from DermaScan AI.',
+                        content: 'Always seek the advice of a qualified dermatologist, physician, or other licensed healthcare provider with any questions you may have regarding a medical condition. Do not delay in seeking professional medical advice or disregard professional medical advice based on information from SKINOVA.',
                     },
                     {
                         title: 'AI Limitations',
@@ -27,11 +27,11 @@ const MedicalDisclaimer = () => (
                     },
                     {
                         title: 'Emergency Situations',
-                        content: 'If you are experiencing a medical emergency, rapidly worsening symptoms, severe pain, difficulty breathing, significant bleeding, or signs of serious infection — call emergency services (911 or your local emergency number) immediately. Do not use DermaScan AI instead of seeking emergency care.',
+                        content: 'If you are experiencing a medical emergency, rapidly worsening symptoms, severe pain, difficulty breathing, significant bleeding, or signs of serious infection — call emergency services (911 or your local emergency number) immediately. Do not use SKINOVA instead of seeking emergency care.',
                     },
                     {
                         title: 'No Prescriptions or Treatment Plans',
-                        content: 'DermaScan AI does not prescribe medications, recommend specific prescription treatments, or provide treatment plans. Never start, stop, or modify any medication or treatment based on information from this application.',
+                        content: 'SKINOVA does not prescribe medications, recommend specific prescription treatments, or provide treatment plans. Never start, stop, or modify any medication or treatment based on information from this application.',
                     },
                     {
                         title: 'Image and Data Privacy',
@@ -46,8 +46,8 @@ const MedicalDisclaimer = () => (
 
                 <div className="rounded-xl bg-yellow-500/10 border border-yellow-500/30 p-6 text-center">
                     <p className="text-yellow-200 text-sm font-medium">
-                        By using DermaScan AI, you acknowledge that you have read, understood, and agree to this disclaimer.
-                        DermaScan AI and its developers are not liable for any health decisions made based on the information provided.
+                        By using SKINOVA, you acknowledge that you have read, understood, and agree to this disclaimer.
+                        SKINOVA and its developers are not liable for any health decisions made based on the information provided.
                     </p>
                 </div>
             </div>

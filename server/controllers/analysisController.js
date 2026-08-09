@@ -32,7 +32,6 @@ export const analyzeImage = async (req, res, next) => {
 
         // Create analysis record with pending status
         const analysis = new Analysis({
-            userId: req.user._id,
             imageUrl,
             imagePublicId: imagePublicId || null,
             symptoms: symptoms || {},
@@ -75,12 +74,12 @@ export const getAnalyses = async (req, res, next) => {
         const skip = (page - 1) * limit;
 
         const [analyses, total] = await Promise.all([
-            Analysis.find({ userId: req.user._id })
+            Analysis.find()
                 .sort({ createdAt: -1 })
                 .skip(skip)
                 .limit(limit)
                 .select('-__v'),
-            Analysis.countDocuments({ userId: req.user._id }),
+            Analysis.countDocuments(),
         ]);
 
         return successResponse(res, 200, 'Analyses fetched', {

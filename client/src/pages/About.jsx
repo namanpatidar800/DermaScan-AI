@@ -6,7 +6,7 @@ const About = () => (
         <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
                 <span className="text-primary-400 text-sm font-semibold uppercase tracking-widest mb-4 block">About</span>
-                <h1 className="text-4xl font-bold text-white mb-4">About DermaScan AI</h1>
+                <h1 className="text-4xl font-bold text-white mb-4">About SKINOVA</h1>
                 <p className="text-surface-200 max-w-xl mx-auto leading-relaxed">
                     An AI-assisted tool for preliminary awareness of dermatological conditions.
                 </p>
@@ -15,10 +15,10 @@ const About = () => (
             <div className="space-y-8">
                 <div className="glass-card p-8 border border-white/8">
                     <h2 className="font-bold text-white text-xl mb-4 flex items-center gap-2">
-                        <ScanLine className="w-5 h-5 text-primary-400" /> What Is DermaScan AI?
+                        <ScanLine className="w-5 h-5 text-primary-400" /> What Is SKINOVA?
                     </h2>
                     <p className="text-surface-200 leading-relaxed mb-4">
-                        DermaScan AI is an AI-powered web application designed to help people gain preliminary awareness
+                        SKINOVA is an AI-powered web application designed to help people gain preliminary awareness
                         about visible skin conditions. Users can upload or capture images of affected skin areas, answer a
                         structured symptom questionnaire, and receive an AI-assisted preliminary assessment.
                     </p>
@@ -30,7 +30,7 @@ const About = () => (
 
                 <div className="glass-card p-8 border border-white/8">
                     <h2 className="font-bold text-white text-xl mb-4 flex items-center gap-2">
-                        <Shield className="w-5 h-5 text-primary-400" /> What DermaScan AI Is NOT
+                        <Shield className="w-5 h-5 text-primary-400" /> What SKINOVA Is NOT
                     </h2>
                     <ul className="space-y-3 text-surface-200 text-sm leading-relaxed">
                         {[
@@ -66,7 +66,7 @@ const About = () => (
                         <Users className="w-5 h-5 text-primary-400" /> Who Is It For?
                     </h2>
                     <p className="text-surface-200 leading-relaxed">
-                        DermaScan AI is for anyone who notices a skin concern and wants a quick, preliminary,
+                        SKINOVA is for anyone who notices a skin concern and wants a quick, preliminary,
                         AI-assisted perspective before deciding how to proceed. It is especially useful for individuals
                         who want to understand whether a condition warrants professional evaluation.
                     </p>

@@ -6,7 +6,7 @@ const HowItWorks = () => (
         <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
                 <span className="text-primary-400 text-sm font-semibold uppercase tracking-widest mb-4 block">The Process</span>
-                <h1 className="text-4xl font-bold text-white mb-4">How DermaScan AI Works</h1>
+                <h1 className="text-4xl font-bold text-white mb-4">How SKINOVA Works</h1>
                 <p className="text-surface-200 max-w-xl mx-auto">
                     A simple, step-by-step process from photo to preliminary assessment.
                 </p>
@@ -80,7 +80,7 @@ const HowItWorks = () => (
             <div className="glass-card p-8 border border-yellow-500/20 bg-yellow-500/5 text-center">
                 <h3 className="font-semibold text-yellow-300 mb-2">Important Reminder</h3>
                 <p className="text-yellow-200/80 text-sm leading-relaxed mb-6">
-                    DermaScan AI is <strong>not a medical diagnostic tool</strong>. It provides preliminary information
+                    SKINOVA is <strong>not a medical diagnostic tool</strong>. It provides preliminary information
                     to help you decide whether to seek professional care. Always consult a qualified dermatologist or
                     healthcare professional for proper diagnosis and treatment.
                 </p>

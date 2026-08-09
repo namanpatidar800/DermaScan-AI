@@ -5,11 +5,14 @@
 
 import MockProvider from './ai/mockProvider.js';
 import RealProvider from './ai/realProvider.js';
+import GeminiProvider from './ai/geminiProvider.js';
 
 const getProvider = () => {
     const providerName = process.env.AI_PROVIDER || 'mock';
     if (providerName === 'mock') {
         return new MockProvider();
+    } else if (providerName === 'gemini') {
+        return new GeminiProvider();
     }
     return new RealProvider();
 };

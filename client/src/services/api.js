@@ -8,7 +8,7 @@ const api = axios.create({
 // Attach JWT token to every request
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('dermascan_token');
+        const token = localStorage.getItem('skinova_token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -22,8 +22,8 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
-            localStorage.removeItem('dermascan_token');
-            localStorage.removeItem('dermascan_user');
+            localStorage.removeItem('skinova_token');
+            localStorage.removeItem('skinova_user');
             // Only redirect if not already on auth pages
             if (!window.location.pathname.startsWith('/login') && !window.location.pathname.startsWith('/register')) {
                 window.location.href = '/login';

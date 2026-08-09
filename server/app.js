@@ -10,6 +10,7 @@ import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import analysisRoutes from './routes/analysisRoutes.js';
 import locationRoutes from './routes/locationRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.use('/api', generalRateLimit);
 app.get('/api/health', (req, res) => {
     res.json({
         success: true,
-        message: 'DermaScan AI API is running',
+        message: 'SKINOVA API is running',
         environment: process.env.NODE_ENV,
         aiProvider: process.env.AI_PROVIDER || 'mock',
         timestamp: new Date().toISOString(),
@@ -47,6 +48,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/analysis', analysisRoutes);
 app.use('/api/locations', locationRoutes);
+app.use('/api/chat', chatRoutes);
 
 // 404 handler
 app.use(notFound);

@@ -11,7 +11,7 @@ export const uploadImageToCloud = async (fileBuffer, originalName) => {
     return new Promise((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
             {
-                folder: 'dermascan-ai',
+                folder: 'skinova',
                 resource_type: 'image',
                 transformation: [{ quality: 'auto', fetch_format: 'auto' }],
             },

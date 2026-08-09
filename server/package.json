@@ -1,7 +1,7 @@
 {
-  "name": "dermascan-server",
+  "name": "skinova-server",
   "version": "1.0.0",
-  "description": "DermaScan AI — Backend API",
+  "description": "SKINOVA — Backend API",
   "main": "server.js",
   "type": "module",
   "scripts": {
