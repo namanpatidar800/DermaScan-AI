@@ -37,6 +37,14 @@ const analysisSchema = new mongoose.Schema(
             previousEpisodes: { type: Boolean, default: false },
             notes: { type: String, default: '' },
         },
+        patientDetails: {
+            fullName: { type: String, default: '' },
+            contactNumber: { type: String, default: '' },
+            address: { type: String, default: '' },
+            gender: { type: String, enum: ['male', 'female', 'other', ''], default: '' },
+            dob: { type: String, default: '' },
+            age: { type: Number },
+        },
         aiResult: {
             possibleConditions: [conditionSchema],
             observations: [String],

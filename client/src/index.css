@@ -126,6 +126,10 @@ body {
 /* Hide Google branding but KEEP the select box intact */
 .goog-te-gadget {
   color: transparent !important;
+  font-size: 0px !important;
+}
+.goog-te-gadget span {
+  display: none !important;
 }
 .goog-te-gadget .goog-logo-link {
   display: none !important;

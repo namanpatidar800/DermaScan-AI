@@ -59,21 +59,21 @@ const AnalysisDetails = () => {
     return (
         <div className="max-w-3xl mx-auto px-4 py-10">
             <div className="flex items-center justify-between mb-6">
-                <Link to="/history" className="flex items-center gap-1.5 text-surface-200 hover:text-white text-sm transition-colors">
+                <Link to="/history" className="flex items-center gap-1.5 text-surface-600 hover:text-surface-900 text-sm transition-colors">
                     <ChevronLeft className="w-4 h-4" /> History
                 </Link>
                 <div className="flex items-center gap-2">
-                    <Link to={`/analysis/result/${id}`} className="text-xs px-3 py-1.5 rounded-xl border border-primary-500/40 text-primary-400 hover:bg-primary-500/10 transition-all">
-                        Full Result View
+                    <Link to={`/analysis/result/${id}`} className="text-xs px-3 py-1.5 rounded-xl border border-primary-300 text-primary-600 hover:bg-primary-50 transition-all font-semibold shadow-sm bg-white">
+                        Full Report & PDF Download
                     </Link>
-                    <button onClick={handleDelete} className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-all">
+                    <button onClick={handleDelete} className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-xl border border-red-300 text-red-600 hover:bg-red-50 transition-all font-semibold shadow-sm bg-white">
                         <Trash2 className="w-3.5 h-3.5" /> Delete
                     </button>
                 </div>
             </div>
 
-            <h1 className="text-2xl font-bold text-white mb-1">Analysis Detail</h1>
-            <p className="text-surface-200 text-sm mb-8">{new Date(createdAt).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</p>
+            <h1 className="text-2xl font-bold text-surface-900 mb-1">Analysis Detail</h1>
+            <p className="text-surface-600 text-sm mb-8">{new Date(createdAt).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</p>
 
             <div className="space-y-5">
                 {aiResult?.redFlags?.length > 0 && (
@@ -93,22 +93,22 @@ const AnalysisDetails = () => {
                 )}
 
                 <div className="grid sm:grid-cols-2 gap-5">
-                    <div className="glass-card p-5 border border-white/8">
-                        <p className="text-xs text-surface-200 mb-3">Analyzed Image</p>
+                    <div className="bg-white p-5 rounded-xl border border-surface-200 shadow-sm">
+                        <p className="text-xs font-bold text-surface-500 uppercase mb-3">Analyzed Image</p>
                         <div className="rounded-xl overflow-hidden bg-surface-800 aspect-square">
                             <img src={imageUrl} alt="Analyzed skin" className="w-full h-full object-cover" />
                         </div>
                     </div>
-                    <div className="glass-card p-5 border border-white/8 space-y-3">
+                    <div className="bg-white p-5 rounded-xl border border-surface-200 shadow-sm space-y-3">
                         <div>
-                            <p className="text-xs text-surface-200 mb-2">Severity</p>
+                            <p className="text-xs font-bold text-surface-500 uppercase mb-2">Severity</p>
                             <span className={`inline-flex items-center gap-1.5 text-sm font-semibold px-3 py-1.5 rounded-xl border ${sevConfig.bg} ${sevConfig.color}`}>
                                 {sevConfig.label}
                             </span>
                         </div>
                         {symptoms && (
                             <div>
-                                <p className="text-xs text-surface-200 mb-2">Reported Symptoms</p>
+                                <p className="text-xs font-bold text-surface-500 uppercase mb-2 mt-4">Reported Symptoms</p>
                                 <div className="flex flex-wrap gap-1.5">
                                     {symptoms.location && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">{symptoms.location}</span>}
                                     {symptoms.duration && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">{symptoms.duration}</span>}
@@ -124,21 +124,21 @@ const AnalysisDetails = () => {
                 </div>
 
                 {aiResult?.possibleConditions?.length > 0 && (
-                    <div className="glass-card p-6 border border-white/8">
-                        <div className="flex items-center gap-2 mb-4 text-sm font-medium text-white">
-                            <Info className="w-4 h-4 text-primary-400" /> Possible Conditions
+                    <div className="bg-white p-6 rounded-xl border border-surface-200 shadow-sm">
+                        <div className="flex items-center gap-2 mb-4 text-sm font-bold text-surface-900 uppercase">
+                            <Info className="w-4 h-4 text-primary-500" /> Possible Conditions
                         </div>
                         <div className="space-y-4">
                             {aiResult.possibleConditions.map((cond, i) => (
-                                <div key={i} className={`p-4 rounded-xl border ${i === 0 ? 'border-primary-500/30 bg-primary-500/5' : 'border-white/5 bg-surface-800/30'}`}>
+                                <div key={i} className={`p-4 rounded-xl border ${i === 0 ? 'border-primary-300 bg-primary-50' : 'border-surface-200 bg-white'}`}>
                                     <div className="flex justify-between items-start mb-2">
-                                        <h4 className="font-semibold text-white text-sm">{cond.name}</h4>
-                                        <span className="text-lg font-bold text-primary-400">{Math.round(cond.confidence * 100)}%</span>
+                                        <h4 className="font-bold text-surface-900 text-sm">{cond.name}</h4>
+                                        <span className="text-lg font-bold text-primary-600">{Math.round(cond.confidence * 100)}%</span>
                                     </div>
                                     <div className="h-1.5 bg-surface-700 rounded-full mb-2">
                                         <div className="h-full bg-primary-500 rounded-full" style={{ width: `${Math.round(cond.confidence * 100)}%` }} />
                                     </div>
-                                    {cond.description && <p className="text-xs text-surface-200 leading-relaxed">{cond.description}</p>}
+                                    {cond.description && <p className="text-xs text-surface-600 leading-relaxed">{cond.description}</p>}
                                 </div>
                             ))}
                         </div>
@@ -146,9 +146,9 @@ const AnalysisDetails = () => {
                 )}
 
                 {aiResult?.recommendation && (
-                    <div className="glass-card p-5 border border-primary-500/20">
-                        <h3 className="font-semibold text-white mb-2 text-sm">Recommended Next Steps</h3>
-                        <p className="text-surface-200 text-sm leading-relaxed">{aiResult.recommendation}</p>
+                    <div className="bg-primary-50 p-6 rounded-xl border border-primary-200">
+                        <h3 className="font-bold text-primary-900 mb-2 text-sm uppercase">Recommended Next Steps</h3>
+                        <p className="text-primary-800 text-sm leading-relaxed">{aiResult.recommendation}</p>
                     </div>
                 )}
 

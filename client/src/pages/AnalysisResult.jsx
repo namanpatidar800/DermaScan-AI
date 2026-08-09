@@ -65,7 +65,7 @@ const AnalysisResult = () => {
                 margin: 0.2,
                 filename: `SKINOVA-Report-${id.slice(-6).toUpperCase()}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
+                html2canvas: { scale: 2, useCORS: true, allowTaint: true, letterRendering: true },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             await html2pdf().set(opt).from(reportRef.current).save();
@@ -101,7 +101,7 @@ const AnalysisResult = () => {
         </div>
     );
 
-    const { aiResult, imageUrl, symptoms, createdAt } = analysis || {};
+    const { aiResult, imageUrl, symptoms, patientDetails, createdAt } = analysis || {};
     const conditions = aiResult?.multiplePossibilities || [];
     const redFlags = aiResult?.redFlags || [];
     const confTier = aiResult?.confidenceTier || 'LOW';
@@ -136,7 +136,7 @@ const AnalysisResult = () => {
             <div ref={reportRef} className="bg-white rounded-2xl shadow-xl border border-surface-200 overflow-hidden font-sans">
 
                 {/* Header */}
-                <div className="bg-skinova-dark p-6 md:p-8 flex justify-between items-center text-white border-b-4 border-skinova-coral">
+                <div className="bg-skinova-dark p-6 md:p-8 flex flex-col items-center sm:items-stretch sm:flex-row flex-wrap justify-between gap-6 text-white border-b-4 border-skinova-coral">
                     <div className="flex gap-4 items-center">
                         <img src="/skinova-logo1.png" crossOrigin="anonymous" alt="SKINOVA Logo" className="h-14 w-auto rounded-xl object-contain mix-blend-screen bg-skinova-white p-1" />
                         <div>
@@ -148,10 +148,30 @@ const AnalysisResult = () => {
                             <p className="text-skinova-olive text-xs mt-0.5 max-w-sm">AI-assisted screening based on visual mapping and patient context.</p>
                         </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right mt-4 sm:mt-0">
                         <div className="text-2xl font-bold font-mono tracking-wider text-white">{caseId}</div>
-                        <p className="text-skinova-olive text-xs font-mono uppercase mt-1">{new Date(createdAt).toLocaleDateString()} • Anonymous</p>
+                        <p className="text-skinova-olive text-xs font-mono uppercase mt-1">{new Date(createdAt).toLocaleDateString()} • {patientDetails?.fullName || 'Anonymous'}</p>
                     </div>
+                    {patientDetails?.fullName && (
+                        <div className="mt-6 pt-5 border-t border-white/10 grid grid-cols-2 lg:grid-cols-4 gap-6 w-full text-left bg-black/10 p-4 rounded-xl shadow-inner">
+                            <div>
+                                <p className="text-[10px] text-skinova-olive font-bold uppercase tracking-widest mb-1 shadow-sm">Patient Name</p>
+                                <p className="text-sm font-semibold text-white tracking-wide">{patientDetails.fullName}</p>
+                            </div>
+                            <div>
+                                <p className="text-[10px] text-skinova-olive font-bold uppercase tracking-widest mb-1 shadow-sm">Age / Gender</p>
+                                <p className="text-sm font-semibold text-white tracking-wide capitalize">{patientDetails.age || 'N/A'} yrs / {patientDetails.gender || 'N/A'}</p>
+                            </div>
+                            <div>
+                                <p className="text-[10px] text-skinova-olive font-bold uppercase tracking-widest mb-1 shadow-sm">Contact Number</p>
+                                <p className="text-sm font-semibold text-white tracking-wide">{patientDetails.contactNumber || 'N/A'}</p>
+                            </div>
+                            <div>
+                                <p className="text-[10px] text-skinova-olive font-bold uppercase tracking-widest mb-1 shadow-sm">Address</p>
+                                <p className="text-sm font-semibold text-white tracking-wide truncate" title={patientDetails.address}>{patientDetails.address || 'N/A'}</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Visible Safety Layer */}

@@ -4,10 +4,11 @@ import { analyze } from '../services/analysisService.js';
 import Disclaimer from '../components/Disclaimer.jsx';
 import ImageUploader from '../components/ImageUploader.jsx';
 import SymptomForm from '../components/SymptomForm.jsx';
+import PatientDetailsForm from '../components/PatientDetailsForm.jsx';
 import { CheckCircle, AlertCircle, ScanLine, Loader2, ChevronLeft, ChevronRight, Edit3 } from 'lucide-react';
 
-// ── Step 3: Review Step ───────────────────────────────────────────────────────
-const ReviewStep = ({ imageData, symptoms, onEditImage, onEditSymptoms, onSubmit }) => (
+// ── Step 4: Review Step ───────────────────────────────────────────────────────
+const ReviewStep = ({ imageData, symptoms, patientDetails, onEditImage, onEditSymptoms, onEditPatientDetails, onSubmit }) => (
     <div className="space-y-8">
         <div>
             <h2 className="text-xl font-bold text-surface-900 mb-1">Review Your Assessment</h2>
@@ -62,6 +63,25 @@ const ReviewStep = ({ imageData, symptoms, onEditImage, onEditSymptoms, onSubmit
                     </div>
 
                     <div className="col-span-2 border-t border-surface-200 pt-4">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="block text-surface-500 font-bold text-[10px] uppercase tracking-wider">Patient Details</span>
+                            <button onClick={onEditPatientDetails} className="text-primary-600 hover:text-primary-700 transition-colors flex items-center gap-1 text-xs font-medium bg-primary-50 px-2 py-1 rounded">
+                                <Edit3 className="w-3 h-3" /> Edit
+                            </button>
+                        </div>
+                        {patientDetails ? (
+                            <div className="grid grid-cols-2 gap-2 text-sm bg-white p-3 rounded border border-surface-200 shadow-sm">
+                                <div><span className="text-surface-500">Name:</span> <span className="font-medium text-surface-900">{patientDetails.fullName}</span></div>
+                                <div><span className="text-surface-500">Gender/Age:</span> <span className="font-medium text-surface-900 capitalize">{patientDetails.gender || 'N/A'} / {patientDetails.age || 'N/A'}</span></div>
+                                <div><span className="text-surface-500">Contact:</span> <span className="font-medium text-surface-900">{patientDetails.contactNumber || 'N/A'}</span></div>
+                                <div><span className="text-surface-500">DOB:</span> <span className="font-medium text-surface-900">{patientDetails.dob || 'N/A'}</span></div>
+                            </div>
+                        ) : (
+                            <p className="text-surface-500 text-sm">Not provided</p>
+                        )}
+                    </div>
+
+                    <div className="col-span-2 border-t border-surface-200 pt-4">
                         <span className="block text-surface-500 font-bold text-[10px] uppercase tracking-wider mb-1">Additional Notes</span>
                         <p className="text-surface-800 text-sm leading-relaxed bg-white p-3 rounded border border-surface-200 shadow-sm">{symptoms?.notes || 'No additional notes provided.'}</p>
                     </div>
@@ -77,7 +97,7 @@ const ReviewStep = ({ imageData, symptoms, onEditImage, onEditSymptoms, onSubmit
         </div>
 
         <div className="flex gap-3">
-            <button onClick={onEditSymptoms} className="flex items-center gap-2 px-5 py-3 rounded-xl border border-surface-300 text-surface-700 hover:text-surface-900 hover:bg-surface-50 transition-all text-sm font-semibold">
+            <button onClick={onEditPatientDetails} className="flex items-center gap-2 px-5 py-3 rounded-xl border border-surface-300 text-surface-700 hover:text-surface-900 hover:bg-surface-50 transition-all text-sm font-semibold">
                 <ChevronLeft className="w-4 h-4" /> Back
             </button>
             <button
@@ -90,7 +110,7 @@ const ReviewStep = ({ imageData, symptoms, onEditImage, onEditSymptoms, onSubmit
     </div>
 );
 
-// ── Step 4: Processing ────────────────────────────────────────────────────────
+// ── Step 5: Processing ────────────────────────────────────────────────────────
 const ProcessingStep = () => (
     <div className="flex flex-col items-center justify-center py-16 space-y-6">
         <div className="relative">
@@ -133,20 +153,26 @@ const NewAnalysis = () => {
     const [step, setStep] = useState(1);
     const [imageData, setImageData] = useState(null);
     const [symptoms, setSymptoms] = useState(null);
+    const [patientDetails, setPatientDetails] = useState(null);
     const [error, setError] = useState('');
 
     const handleImageReady = (data) => setImageData(data);
 
     const handleSymptomsNext = (collectedSymptoms) => {
         setSymptoms(collectedSymptoms);
-        setStep(3); // Proceed to Review
+        setStep(3); // Proceed to Patient Info
+    };
+
+    const handlePatientDetailsNext = (data) => {
+        setPatientDetails(data);
+        setStep(4); // Proceed to Review
     };
 
     const handleSubmit = async () => {
-        setStep(4);
+        setStep(5);
         setError('');
         try {
-            const result = await analyze(imageData.imageUrl, imageData.imagePublicId, symptoms);
+            const result = await analyze(imageData.imageUrl, imageData.imagePublicId, symptoms, patientDetails);
 
             // Save analysis securely in device LocalStorage to preserve history without auth
             try {
@@ -161,15 +187,16 @@ const NewAnalysis = () => {
             navigate(`/analysis/result/${result.analysis._id}`);
         } catch (err) {
             setError(err.response?.data?.message || 'We couldn\'t complete the analysis. Please try again later.');
-            setStep(3);
+            setStep(4);
         }
     };
 
     const steps = [
         { num: 1, label: 'Upload' },
         { num: 2, label: 'Symptoms' },
-        { num: 3, label: 'Review' },
-        { num: 4, label: 'Analyzing' },
+        { num: 3, label: 'Patient Info' },
+        { num: 4, label: 'Review' },
+        { num: 5, label: 'Analyzing' },
     ];
 
     return (
@@ -204,9 +231,10 @@ const NewAnalysis = () => {
                     </div>
                 )}
                 {step === 1 && <ImageUploader onImageReady={handleImageReady} onNext={() => setStep(2)} />}
-                {step === 2 && <SymptomForm onBack={() => setStep(1)} onNext={handleSymptomsNext} />}
-                {step === 3 && <ReviewStep imageData={imageData} symptoms={symptoms} onEditImage={() => setStep(1)} onEditSymptoms={() => setStep(2)} onSubmit={handleSubmit} />}
-                {step === 4 && <ProcessingStep />}
+                {step === 2 && <SymptomForm initialData={symptoms} onBack={() => setStep(1)} onNext={handleSymptomsNext} />}
+                {step === 3 && <PatientDetailsForm initialData={patientDetails} onBack={() => setStep(2)} onSubmit={handlePatientDetailsNext} />}
+                {step === 4 && <ReviewStep imageData={imageData} symptoms={symptoms} patientDetails={patientDetails} onEditImage={() => setStep(1)} onEditSymptoms={() => setStep(2)} onEditPatientDetails={() => setStep(3)} onSubmit={handleSubmit} />}
+                {step === 5 && <ProcessingStep />}
             </div>
 
             <div className="mt-8">

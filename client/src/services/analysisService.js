@@ -15,8 +15,8 @@ export const uploadImage = async (file, onProgress) => {
     return data;
 };
 
-export const analyze = async (imageUrl, imagePublicId, symptoms) => {
-    const { data } = await api.post('/analysis/analyze', { imageUrl, imagePublicId, symptoms });
+export const analyze = async (imageUrl, imagePublicId, symptoms, patientDetails) => {
+    const { data } = await api.post('/analysis/analyze', { imageUrl, imagePublicId, symptoms, patientDetails });
     return data;
 };
 

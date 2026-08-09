@@ -24,7 +24,7 @@ export const uploadImage = async (req, res, next) => {
 // POST /api/analysis/analyze — Run AI analysis and save result
 export const analyzeImage = async (req, res, next) => {
     try {
-        const { imageUrl, imagePublicId, symptoms } = req.body;
+        const { imageUrl, imagePublicId, symptoms, patientDetails } = req.body;
 
         if (!imageUrl) {
             return errorResponse(res, 400, 'Image URL is required');
@@ -35,6 +35,7 @@ export const analyzeImage = async (req, res, next) => {
             imageUrl,
             imagePublicId: imagePublicId || null,
             symptoms: symptoms || {},
+            patientDetails: patientDetails || {},
             status: 'processing',
         });
         await analysis.save();
