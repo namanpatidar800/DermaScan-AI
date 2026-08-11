@@ -17,7 +17,7 @@
 
 ## 🌐 Live Link
 > **Try out SKINOVA Live:**
-> 👉 **[https://skinova-iwt7.onrender.com/](https://skinova-e0ho.onrender.com/)**
+> 👉 **[https://skinova-e0ho.onrender.com](https://skinova-e0ho.onrender.com/)**
 
 ---
 
