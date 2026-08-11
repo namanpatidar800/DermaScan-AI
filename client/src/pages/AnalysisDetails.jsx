@@ -53,8 +53,11 @@ const AnalysisDetails = () => {
     );
 
     const { aiResult, imageUrl, symptoms, createdAt } = analysis;
-    const sev = aiResult?.severity || 'low';
-    const sevConfig = severityConfig[sev];
+
+    // Map backend attentionLevel (MODERATE) to local severityConfig keys (moderate)
+    const rawAtt = aiResult?.attentionLevel?.toLowerCase() || 'low';
+    const sev = rawAtt === 'moderate' || rawAtt === 'high' ? rawAtt : (rawAtt === 'urgent' ? 'urgent' : 'low');
+    const sevConfig = severityConfig[sev] || severityConfig.low;
 
     return (
         <div className="max-w-3xl mx-auto px-4 py-10">
@@ -110,32 +113,32 @@ const AnalysisDetails = () => {
                             <div>
                                 <p className="text-xs font-bold text-surface-500 uppercase mb-2 mt-4">Reported Symptoms</p>
                                 <div className="flex flex-wrap gap-1.5">
-                                    {symptoms.location && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">{symptoms.location}</span>}
-                                    {symptoms.duration && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">{symptoms.duration}</span>}
-                                    {symptoms.itching && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">Itching</span>}
-                                    {symptoms.pain && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">Pain</span>}
-                                    {symptoms.redness && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">Redness</span>}
-                                    {symptoms.spreading && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">Spreading</span>}
-                                    {symptoms.scaling && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-700 text-surface-200">Scaling</span>}
+                                    {symptoms.location && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-100 text-surface-700 font-bold">{symptoms.location}</span>}
+                                    {symptoms.duration && <span className="text-xs px-2 py-0.5 rounded-full bg-surface-100 text-surface-700 font-bold">{symptoms.duration}</span>}
+                                    {symptoms.itching && <span className="text-xs px-2 py-0.5 rounded-full bg-primary-100 text-primary-700 font-bold">Itching</span>}
+                                    {symptoms.pain && <span className="text-xs px-2 py-0.5 rounded-full bg-primary-100 text-primary-700 font-bold">Pain</span>}
+                                    {symptoms.redness && <span className="text-xs px-2 py-0.5 rounded-full bg-primary-100 text-primary-700 font-bold">Redness</span>}
+                                    {symptoms.spreading && <span className="text-xs px-2 py-0.5 rounded-full bg-primary-100 text-primary-700 font-bold">Spreading</span>}
+                                    {symptoms.scaling && <span className="text-xs px-2 py-0.5 rounded-full bg-primary-100 text-primary-700 font-bold">Scaling</span>}
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
 
-                {aiResult?.possibleConditions?.length > 0 && (
+                {aiResult?.multiplePossibilities?.length > 0 && (
                     <div className="bg-white p-6 rounded-xl border border-surface-200 shadow-sm">
                         <div className="flex items-center gap-2 mb-4 text-sm font-bold text-surface-900 uppercase">
                             <Info className="w-4 h-4 text-primary-500" /> Possible Conditions
                         </div>
                         <div className="space-y-4">
-                            {aiResult.possibleConditions.map((cond, i) => (
+                            {aiResult.multiplePossibilities.map((cond, i) => (
                                 <div key={i} className={`p-4 rounded-xl border ${i === 0 ? 'border-primary-300 bg-primary-50' : 'border-surface-200 bg-white'}`}>
                                     <div className="flex justify-between items-start mb-2">
                                         <h4 className="font-bold text-surface-900 text-sm">{cond.name}</h4>
                                         <span className="text-lg font-bold text-primary-600">{Math.round(cond.confidence * 100)}%</span>
                                     </div>
-                                    <div className="h-1.5 bg-surface-700 rounded-full mb-2">
+                                    <div className="h-1.5 bg-surface-200 rounded-full mb-2">
                                         <div className="h-full bg-primary-500 rounded-full" style={{ width: `${Math.round(cond.confidence * 100)}%` }} />
                                     </div>
                                     {cond.description && <p className="text-xs text-surface-600 leading-relaxed">{cond.description}</p>}

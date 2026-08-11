@@ -39,6 +39,7 @@ const analysisSchema = new mongoose.Schema(
         },
         patientDetails: {
             fullName: { type: String, default: '' },
+            email: { type: String, default: '' },
             contactNumber: { type: String, default: '' },
             address: { type: String, default: '' },
             gender: { type: String, enum: ['male', 'female', 'other', ''], default: '' },

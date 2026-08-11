@@ -35,6 +35,7 @@ class GeminiProvider extends AIProvider {
                 2. Explicitly explain your reasoning in "whyThis" (Why these conditions match).
                 3. Explicitly explain uncertainty in "whyUncertain" (e.g. overlap with other conditions, poor lighting, non-specific symptoms).
                 4. "observations" MUST explicitly list visual and morphological indicators you see.
+                5. DISEASE NOMENCLATURE: If the visual presentation closely matches specific conditions like Acne, Eczema, Psoriasis, Fungal Infection, Contact Dermatitis, Hives, Vitiligo, or Hyperpigmentation, you MUST EXPLICITLY specify the exact disease name in 'multiplePossibilities' rather than offering generic/vague descriptions.
                 
                 CRITICAL MEDICAL SAFETY:
                 - Do NOT provide a definitive diagnosis. Use probabilistic language.

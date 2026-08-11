@@ -1,11 +1,45 @@
-import { useState, useEffect } from 'react';
-import { User, Phone, MapPin, Calendar, ChevronRight, Users, ArrowLeft } from 'lucide-react';
+import { useState } from 'react';
+import { User, Phone, MapPin, Calendar, ChevronRight, Users, ArrowLeft, Mail, ChevronDown } from 'lucide-react';
+
+const COUNTRY_CODES = [
+    { code: '+91', label: 'IN (+91)' }, { code: '+1', label: 'US/CA (+1)' },
+    { code: '+44', label: 'UK (+44)' }, { code: '+61', label: 'AU (+61)' },
+    { code: '+81', label: 'JP (+81)' }, { code: '+86', label: 'CN (+86)' },
+    { code: '+49', label: 'DE (+49)' }, { code: '+33', label: 'FR (+33)' },
+    { code: '+39', label: 'IT (+39)' }, { code: '+34', label: 'ES (+34)' },
+    { code: '+55', label: 'BR (+55)' }, { code: '+971', label: 'AE (+971)' },
+    { code: '+65', label: 'SG (+65)' }, { code: '+7', label: 'RU (+7)' },
+    { code: '+82', label: 'KR (+82)' }, { code: '+52', label: 'MX (+52)' },
+    { code: '+62', label: 'ID (+62)' }, { code: '+92', label: 'PK (+92)' },
+    { code: '+880', label: 'BD (+880)' }, { code: '+27', label: 'ZA (+27)' },
+    { code: '+60', label: 'MY (+60)' }, { code: '+63', label: 'PH (+63)' },
+    { code: '+66', label: 'TH (+66)' }, { code: '+90', label: 'TR (+90)' },
+    { code: '+20', label: 'EG (+20)' }, { code: '+98', label: 'IR (+98)' },
+    { code: '+31', label: 'NL (+31)' }, { code: '+41', label: 'CH (+41)' },
+    { code: '+46', label: 'SE (+46)' }, { code: '+977', label: 'NP (+977)' },
+    { code: '+94', label: 'LK (+94)' }
+];
 
 const PatientDetailsForm = ({ onSubmit, onBack, initialData }) => {
     const data = initialData || {};
+
+    let initCountry = '+91';
+    let initPhone = '';
+    if (data.contactNumber) {
+        if (data.contactNumber.includes('-')) {
+            const parts = data.contactNumber.split('-');
+            initCountry = parts[0];
+            initPhone = parts[1];
+        } else {
+            initPhone = data.contactNumber.replace(/^\+[0-9]+/, '').trim();
+        }
+    }
+
     const [formData, setFormData] = useState({
         fullName: data.fullName || '',
-        contactNumber: data.contactNumber || '',
+        email: data.email || '',
+        countryCode: initCountry,
+        phoneNumber: initPhone,
         address: data.address || '',
         gender: data.gender || '',
         dob: data.dob || '',
@@ -28,7 +62,13 @@ const PatientDetailsForm = ({ onSubmit, onBack, initialData }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+
+        let finalValue = value;
+        if (name === 'phoneNumber') {
+            finalValue = value.replace(/\D/g, '').slice(0, 10);
+        }
+
+        setFormData(prev => ({ ...prev, [name]: finalValue }));
         // Clear error when user types
         if (errors[name]) {
             setErrors(prev => ({ ...prev, [name]: '' }));
@@ -40,6 +80,7 @@ const PatientDetailsForm = ({ onSubmit, onBack, initialData }) => {
         if (!formData.fullName.trim()) newErrors.fullName = 'Full Name is required';
         if (!formData.dob) newErrors.dob = 'Date of Birth is required';
         if (!formData.gender) newErrors.gender = 'Gender is required';
+        if (formData.email && !/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = 'Valid email is required';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -49,7 +90,15 @@ const PatientDetailsForm = ({ onSubmit, onBack, initialData }) => {
         e.preventDefault();
         if (validate()) {
             const age = calculateAge(formData.dob);
-            onSubmit({ ...formData, age });
+            const submissionData = { ...formData, age };
+            if (formData.phoneNumber) {
+                submissionData.contactNumber = `${formData.countryCode}-${formData.phoneNumber}`;
+            } else {
+                submissionData.contactNumber = '';
+            }
+            delete submissionData.countryCode;
+            delete submissionData.phoneNumber;
+            onSubmit(submissionData);
         }
     };
 
@@ -75,6 +124,21 @@ const PatientDetailsForm = ({ onSubmit, onBack, initialData }) => {
                         placeholder="John Doe"
                     />
                     {errors.fullName && <p className="text-red-500 text-xs mt-1 font-medium">{errors.fullName}</p>}
+                </div>
+
+                <div>
+                    <label className="block text-sm font-semibold text-surface-700 mb-1.5 flex items-center gap-1.5">
+                        <Mail className="w-4 h-4 text-primary-500" /> Email Address
+                    </label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500 bg-red-50' : 'border-surface-200'} bg-surface-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors text-sm font-medium`}
+                        placeholder="john@example.com"
+                    />
+                    {errors.email && <p className="text-red-500 text-xs mt-1 font-medium">{errors.email}</p>}
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-5">
@@ -117,16 +181,31 @@ const PatientDetailsForm = ({ onSubmit, onBack, initialData }) => {
                 {/* Contact Number */}
                 <div>
                     <label className="block text-sm font-semibold text-surface-700 mb-1.5 flex items-center gap-1.5">
-                        <Phone className="w-4 h-4 text-primary-500" /> Contact Number
+                        <Phone className="w-4 h-4 text-primary-500" /> Contact Number (10 digits)
                     </label>
-                    <input
-                        type="tel"
-                        name="contactNumber"
-                        placeholder="+1 (555) 000-0000"
-                        value={formData.contactNumber}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-surface-200 bg-surface-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors text-sm font-medium"
-                    />
+                    <div className="flex gap-2">
+                        <div className="relative w-32 shrink-0">
+                            <select
+                                name="countryCode"
+                                value={formData.countryCode}
+                                onChange={handleChange}
+                                className="w-full px-3 py-3 rounded-xl border border-surface-200 bg-surface-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors text-sm font-medium appearance-none"
+                            >
+                                {COUNTRY_CODES.map(c => (
+                                    <option key={c.code} value={c.code}>{c.label}</option>
+                                ))}
+                            </select>
+                            <ChevronDown className="w-4 h-4 text-surface-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        </div>
+                        <input
+                            type="tel"
+                            name="phoneNumber"
+                            placeholder="0000000000"
+                            value={formData.phoneNumber}
+                            onChange={handleChange}
+                            className="flex-1 px-4 py-3 rounded-xl border border-surface-200 bg-surface-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors text-sm font-medium"
+                        />
+                    </div>
                 </div>
 
                 {/* Address */}

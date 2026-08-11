@@ -13,9 +13,9 @@ const Landing = () => {
     return (
         <div className="overflow-x-hidden bg-skinova-white selection:bg-skinova-coral/30">
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 border-b border-skinova-bg">
+            <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 px-4 border-b border-skinova-bg">
                 <div className="max-w-5xl mx-auto text-center relative z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-skinova-bg border border-skinova-olive/20 text-skinova-dark text-xs font-bold tracking-wide uppercase mb-10 shadow-sm animate-fade-in transition-all">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-skinova-bg border border-skinova-olive/20 text-skinova-dark text-xs font-bold tracking-wide uppercase mb-6 shadow-sm animate-fade-in transition-all">
                         <span className="w-2 h-2 rounded-full bg-skinova-coral animate-pulse" />
                         AI-Assisted Educational Screening
                     </div>
@@ -25,7 +25,7 @@ const Landing = () => {
                         <span className="font-semibold text-skinova-coral">OVA</span>
                     </h1>
 
-                    <div className="flex gap-2 justify-center items-center text-[10px] md:text-xs font-bold tracking-[0.2em] text-skinova-olive mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                    <div className="flex gap-2 justify-center items-center text-[10px] md:text-xs font-bold tracking-[0.2em] text-skinova-olive mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
                         <span>DETECT</span>
                         <span className="text-skinova-coral">•</span>
                         <span>ANALYZE</span>
@@ -33,33 +33,27 @@ const Landing = () => {
                         <span>CARE</span>
                     </div>
 
-                    <p className="text-lg md:text-xl text-skinova-olive max-w-2xl mx-auto mb-12 font-light leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                    <p className="text-lg md:text-xl text-skinova-olive max-w-2xl mx-auto mb-8 font-light leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                         A premium platform built to help you understand visible skin conditions, track changes, and find professional care when necessary.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                         <Link
                             to="/analysis/new"
-                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 bg-skinova-dark hover:bg-skinova-olive text-skinova-white font-medium rounded-xl transition-all duration-300 shadow-xl shadow-skinova-dark/10 hover:-translate-y-0.5 text-sm uppercase tracking-wider"
+                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-3.5 bg-skinova-dark hover:bg-skinova-olive text-skinova-white font-medium rounded-xl transition-all duration-300 shadow-xl shadow-skinova-dark/10 hover:-translate-y-0.5 text-sm uppercase tracking-wider"
                         >
                             <ScanLine className="w-5 h-5" />
                             Scan Your Skin
                         </Link>
                         <Link
-                            to="/ask-skinova"
-                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 bg-skinova-bg hover:bg-skinova-coral/10 text-skinova-dark font-medium rounded-xl transition-all duration-300 border border-skinova-olive/20 text-sm uppercase tracking-wider"
-                        >
-                            Ask SKINOVA ✨
-                        </Link>
-                        <Link
                             to="/find-dermatologist"
-                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 bg-skinova-white hover:bg-skinova-bg text-skinova-coral font-medium rounded-xl transition-all duration-300 border border-skinova-coral/30 text-sm uppercase tracking-wider"
+                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-3.5 bg-skinova-white hover:bg-skinova-bg text-skinova-coral font-medium rounded-xl transition-all duration-300 border border-skinova-coral/30 text-sm uppercase tracking-wider"
                         >
                             Find Care <MapPin className="w-4 h-4" />
                         </Link>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto mt-20 pt-10 border-t border-skinova-bg animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                    <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto mt-16 pt-8 border-t border-skinova-bg animate-fade-in" style={{ animationDelay: '0.5s' }}>
                         {[
                             { icon: Shield, label: 'Secure' },
                             { icon: Activity, label: 'Insightful' },
@@ -138,7 +132,6 @@ const Landing = () => {
                 </div>
             </section>
 
-            {/* Disease Detail Modal */}
             {selectedCondition && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 bg-skinova-dark/60 backdrop-blur-sm animate-fade-in">
                     <div className="bg-skinova-white rounded-3xl w-full max-w-4xl max-h-full overflow-hidden shadow-2xl flex flex-col relative border border-skinova-olive/20 animate-fade-in-up">
@@ -163,7 +156,7 @@ const Landing = () => {
 
                             <div className="grid md:grid-cols-2 gap-10">
 
-                                {/* Left Col */}    
+                                {/* Left Col */}
                                 <div className="space-y-8">
                                     <section>
                                         <h4 className="text-xs font-bold tracking-widest text-skinova-coral uppercase mb-3 flex items-center gap-2"><Info className="w-4 h-4" /> What is it?</h4>
@@ -247,18 +240,6 @@ const Landing = () => {
                     </div>
                 </div>
             )}
-
-            {/* Disclaimer Footer */}
-            <section className="py-12 bg-skinova-dark text-skinova-white text-center px-4">
-                <div className="max-w-2xl mx-auto">
-                    <Book className="w-6 h-6 text-skinova-coral mx-auto mb-4" />
-                    <p className="text-xs leading-relaxed text-skinova-olive/80">
-                        ⚕️ SKINOVA provides AI-assisted educational information only, not an official medical diagnosis.
-                        Do not use this tool to replace the advice of a board-certified dermatologist.
-                        If you are experiencing severe symptoms, please seek emergency medical attention.
-                    </p>
-                </div>
-            </section>
         </div>
     );
 };
