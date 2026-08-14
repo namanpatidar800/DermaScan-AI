@@ -42,7 +42,6 @@ const AnalysisResult = () => {
     const [error, setError] = useState('');
     const [generatingPdf, setGeneratingPdf] = useState(false);
     const reportRef = useRef(null);
-    const pdfLayoutRef = useRef(null);
 
     useEffect(() => {
         const load = async () => {
@@ -90,10 +89,10 @@ const AnalysisResult = () => {
     const caseId = id ? formatCaseId(patientDetails) : '';
 
     const handleDownloadPDF = async () => {
-        if (!pdfLayoutRef.current) return;
+        if (!reportRef.current) return;
         setGeneratingPdf(true);
         try {
-            const images = pdfLayoutRef.current.getElementsByTagName('img');
+            const images = reportRef.current.getElementsByTagName('img');
             await Promise.allSettled(Array.from(images).map(img => {
                 if (img.complete) return Promise.resolve();
                 return new Promise(resolve => {
@@ -102,19 +101,15 @@ const AnalysisResult = () => {
                 });
             }));
 
-            // Clone to avoid html2canvas modifying the page layout visibly 
-            const clonedElement = pdfLayoutRef.current.cloneNode(true);
-            clonedElement.style.display = 'block';
-
             const opt = {
-                margin: 0.25,
+                margin: 0.1,
                 filename: `SKINOVA-Report-${caseId}.pdf`,
                 image: { type: 'jpeg', quality: 1 },
-                html2canvas: { scale: 2.5, useCORS: true, logging: false },
+                html2canvas: { scale: 2, useCORS: true, logging: false },
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
 
-            await html2pdf().set(opt).from(clonedElement).save();
+            await html2pdf().set(opt).from(reportRef.current).save();
         } catch (err) {
             console.error("PDF generation failed:", err);
             alert('Failed to generate PDF. Please try again.');
@@ -391,98 +386,6 @@ const AnalysisResult = () => {
                 </Link>
             </div>
 
-            {/* HIDDEN DOM FOR CLEAN 1-PAGE PDF GENERATION */}
-            <div className="absolute top-0 left-[-9999px] z-[-1]">
-                <div
-                    ref={pdfLayoutRef}
-                    className="w-[8.27in] min-h-[11.69in] bg-white text-black p-10 font-sans"
-                >
-                    <div className="flex justify-between items-start border-b-2 border-slate-800 pb-4 mb-6">
-                        <div className="flex items-center gap-4">
-                            <img src="/skinova-logo1.png" crossOrigin="anonymous" className="w-16 h-16 object-contain mix-blend-multiply" />
-                            <div>
-                                <h1 className="text-2xl font-bold tracking-widest text-slate-900">SKINOVA</h1>
-                                <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Skin Health Assessment</p>
-                            </div>
-                        </div>
-                        <div className="text-right">
-                            <h2 className="text-3xl font-mono font-bold text-slate-900 m-0 leading-none">{caseId}</h2>
-                            <p className="text-sm text-slate-500 mt-2 font-semibold">{new Date(createdAt).toLocaleDateString()}</p>
-                        </div>
-                    </div>
-
-                    {patientDetails?.fullName ? (
-                        <div className="grid grid-cols-2 gap-y-5 gap-x-8 text-sm mb-6 pb-6 border-b border-slate-200">
-                            <div><span className="text-slate-400 uppercase text-xs font-bold w-24 inline-block">Name</span> <span className="font-bold text-slate-900 border-b border-slate-100 pb-1">{patientDetails.fullName}</span></div>
-                            <div><span className="text-slate-400 uppercase text-xs font-bold w-24 inline-block">Age/Gender</span> <span className="font-bold text-slate-900 border-b border-slate-100 pb-1 capitalize">{patientDetails.age || 'N/A'} yrs / {patientDetails.gender || 'N/A'}</span></div>
-                            <div><span className="text-slate-400 uppercase text-xs font-bold w-24 inline-block">Email</span> <span className="font-bold text-slate-900 border-b border-slate-100 pb-1">{patientDetails.email || 'N/A'}</span></div>
-                            <div><span className="text-slate-400 uppercase text-xs font-bold w-24 inline-block">Contact</span> <span className="font-bold text-slate-900 border-b border-slate-100 pb-1">{patientDetails.contactNumber || 'N/A'}</span></div>
-                            <div className="col-span-2"><span className="text-slate-400 uppercase text-xs font-bold w-24 inline-block">Address</span> <span className="font-bold text-slate-900 border-b border-slate-100 pb-1">{patientDetails.address || 'N/A'}</span></div>
-                        </div>
-                    ) : (
-                        <div className="mb-6 pb-6 border-b border-slate-200">
-                            <p className="text-sm font-bold text-slate-500 uppercase">Anonymous Report</p>
-                        </div>
-                    )}
-
-                    <div className="flex gap-6 mb-8 mt-2 h-44 rounded-xl items-start">
-                        <img src={imageUrl} crossOrigin="anonymous" className="w-40 h-40 object-cover rounded-lg border-2 border-slate-200 shadow-sm" />
-                        <div className="flex-1 text-sm text-slate-700 bg-slate-50 p-4 rounded-lg border border-slate-200 h-40 overflow-hidden">
-                            <h3 className="uppercase text-[11px] font-bold tracking-widest text-slate-500 mb-2 border-b border-slate-200 pb-1">Analysis Context</h3>
-                            <p className="mb-1"><strong>Primary Area:</strong> {symptoms?.location} ({symptoms?.duration})</p>
-                            <p className="mb-2"><strong>Symptoms:</strong> {[symptoms?.itching && "Itching", symptoms?.pain && "Pain", symptoms?.swelling && "Swelling", symptoms?.redness && "Redness"].filter(Boolean).join(", ") || "None specific"}</p>
-                            <div>
-                                <strong className="block text-slate-900 text-xs mt-2">AI Visual Indicators:</strong>
-                                <ul className="list-disc pl-4 text-xs space-y-0.5 mt-1">
-                                    {aiResult?.observations?.slice(0, 3).map((o, i) => <li key={i}>{o}</li>)}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="mb-8 grid grid-cols-2 gap-4">
-                        <div className="p-4 border-2 border-slate-300 rounded-lg bg-white relative overflow-hidden">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>
-                            <h4 className="text-[11px] uppercase font-bold text-slate-400 mb-2 text-center tracking-widest">Primary AI Diagnosis</h4>
-                            <p className="text-lg font-bold text-slate-900 text-center leading-tight">{conditions[0]?.name || 'N/A'}</p>
-                            <p className="text-[11px] font-bold text-slate-500 text-center mt-2 bg-slate-100 py-1 rounded inline-block px-3 mx-auto w-fit block">Confidence: {Math.round((conditions[0]?.confidence || 0) * 100)}%</p>
-                        </div>
-                        <div className="p-4 border-2 border-slate-200 rounded-lg bg-amber-50 relative overflow-hidden">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-amber-500"></div>
-                            <h4 className="text-[11px] uppercase font-bold text-amber-700/60 mb-2 text-center tracking-widest">Attention Level</h4>
-                            <p className="text-lg font-bold text-center text-amber-900 leading-tight uppercase">{attConfig.label.replace(' Attention', '')}</p>
-                            {redFlags.length > 0 && <p className="text-[11px] font-bold text-red-600 text-center mt-2 bg-red-100 py-1 rounded w-fit mx-auto px-3 uppercase">⚠️ {redFlags.length} Red Flags Present</p>}
-                        </div>
-                    </div>
-
-                    <div className="mb-6 p-5 bg-blue-50/50 rounded-xl border border-blue-100">
-                        <h3 className="text-[11px] uppercase font-bold tracking-widest text-blue-800 mb-2 flex items-center gap-2">
-                            Recommended Treatment & Care
-                        </h3>
-                        <p className="text-[13px] text-slate-800 font-medium leading-relaxed">{aiResult?.recommendation || 'Seek professional consultation.'}</p>
-                    </div>
-
-                    {redFlags.length > 0 && (
-                        <div className="mb-6 p-5 bg-red-50 rounded-xl border border-red-100">
-                            <h3 className="text-[11px] uppercase font-bold tracking-widest text-red-800 mb-2">Required Precautions (Red Flags)</h3>
-                            <ul className="text-[13px] list-disc pl-5 text-red-900 space-y-1 font-medium">
-                                {redFlags.map((flag, i) => <li key={i}>{flag}</li>)}
-                            </ul>
-                        </div>
-                    )}
-
-                    <div className="mt-auto pt-6 border-t font-sans border-slate-200 text-center absolute bottom-10 left-10 right-10">
-                        <div className="flex flex-wrap justify-center gap-4 text-[9px] uppercase tracking-widest font-bold text-slate-400 mb-3">
-                            <span>• Image Quality Evaluated</span>
-                            <span>• Uncertainty Bounds Applied</span>
-                            <span>• Multimodal Context Validated</span>
-                        </div>
-                        <p className="text-[9px] text-slate-500 max-w-2xl mx-auto leading-relaxed border-t border-slate-100 pt-3">
-                            <strong>Disclaimer:</strong> This SKINOVA report is generated by an educational AI tool and does NOT constitute a medical diagnosis. The AI output can occasionally be incorrect or miss critical nuances. By possessing this report, you acknowledge that you must seek a board-certified healthcare professional for a definitive diagnosis and treatment plan. Do not alter or delay medical treatment based on this document.
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };

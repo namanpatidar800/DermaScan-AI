@@ -9,9 +9,11 @@ const Navbar = () => {
     const isLoggedIn = !!localStorage.getItem('skinova_token');
 
     const handleLogout = async () => {
-        await logout();
-        navigate('/');
-        window.location.reload();
+        try {
+            await logout();
+        } finally {
+            window.location.href = '/login';
+        }
     };
 
     const navLinkClass = ({ isActive }) =>
